@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hb_chess/main.dart';
-
 import 'home.dart';
 
 class Splash extends StatefulWidget {
@@ -25,7 +23,7 @@ class _SplashState extends State<Splash> {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) => MyHomePage(title: title),
+        builder: (context) => const MyHomePage(title: title),
       ),
     );
   }
@@ -37,12 +35,35 @@ class _SplashState extends State<Splash> {
       backgroundColor: Colors.indigo,
       body: Center(
         child: Container(
-          child: Text(
-            'HBChess',
-            style: TextStyle(
-              fontSize: 48,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+          constraints: const BoxConstraints(
+            maxHeight: 225,
+            maxWidth: 225,
+          ),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: const Color.fromARGB(71, 63, 81, 181),
+              width: 3,
+            ),
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black,
+                offset: const Offset(5.0, 5.0),
+                blurRadius: 5.0,
+                spreadRadius: 1.0,
+              ),
+            ],
+            color: Colors.white,
+          ),
+          child: Center(
+            child: Text(
+              'HBChess',
+              style: TextStyle(
+                fontSize: 48,
+                fontWeight: FontWeight.bold,
+                color: Colors.indigo,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
         ),
