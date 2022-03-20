@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 //import 'leaderboard.dart';
+import 'login.dart';
+import 'register.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -82,8 +84,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   Wrap(
                     spacing: 100,
                     children: [
-                      createbutton('Sign Up'),
-                      createbutton('Login'),
+                      createbutton('Sign Up', Register()),
+                      createbutton('Login', Login()),
                     ],
                   ),
                 ],
@@ -108,13 +110,18 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  ElevatedButton createbutton(String label) {
+  ElevatedButton createbutton(String label, Widget pageToShow) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(15.0),
         textStyle: const TextStyle(fontSize: 30),
       ),
-      onPressed: () {},
+      onPressed: () {
+          Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => pageToShow),
+        );
+      },
       child: Text(label),
     );
   }
