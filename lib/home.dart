@@ -15,51 +15,55 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        // background image
-        const Positioned.fill(
-          child: Image(
-            image: AssetImage("assets/images/background.jpg"),
-            fit: BoxFit.fill,
-          ),
-        ),
         Scaffold(
           // allows custom image for background
-          backgroundColor: Colors.transparent,
-
+          //backgroundColor: Colors.transparent,
+          //backgroundColor: Colors.white,
           appBar: AppBar(
             title: Text(widget.title),
           ),
           drawer: Drawer(
-            child: ListView(padding: EdgeInsets.zero, children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Colors.indigo,
-                ),
-                child: Text(
-                  'HBChess',
-                  style: TextStyle(
-                    fontSize: 28,
-                    color: Colors.white,
-                    // Font not being applied
-                    fontFamily: 'Poppins-Regular',
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: [
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Colors.indigo,
+                  ),
+                  child: Text(
+                    'HBChess',
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: Colors.white,
+                      // Font not being applied
+                      fontFamily: 'Poppins-Regular',
+                    ),
                   ),
                 ),
-              ),
 
-              // Need to add routing for each ListTile
-              createDrawerTile(Icons.home, 'Home'),
-              createDrawerTile(Icons.leaderboard, 'Leaderboard'),
-              createDrawerTile(Icons.book, 'Rules'),
-              createDrawerTile(Icons.person_add_alt_outlined, 'Sign Up'),
-              createDrawerTile(Icons.login, 'Login'),
-              createDrawerTile(Icons.settings, 'Settings'),
-            ]),
+                // Need to add routing for each ListTile
+                createDrawerTile(Icons.home, 'Home'),
+                createDrawerTile(Icons.leaderboard, 'Leaderboard'),
+                createDrawerTile(Icons.book, 'Rules'),
+                createDrawerTile(Icons.person_add_alt_outlined, 'Sign Up'),
+                createDrawerTile(Icons.login, 'Login'),
+                createDrawerTile(Icons.settings, 'Settings'),
+              ],
+            ),
           ),
 
           // Main home page body
           body: Center(
             child: Container(
               //color: Colors.white,
+              width: double.infinity,
+              height: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: AssetImage("assets/images/background.jpg"),
+                ),
+              ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -70,18 +74,15 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: const TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
-                      fontFamily: 'Poppins-Regular',
+                      //fontFamily: 'Poppins-Regular',
                     ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 100),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                  Wrap(
+                    spacing: 100,
                     children: [
-                      //const SizedBox(height: 30),
                       createbutton('Sign Up'),
-                      //const SizedBox(height: 30),
                       createbutton('Login'),
                     ],
                   ),
@@ -89,7 +90,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -107,9 +108,10 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  TextButton createbutton(String label) {
-    return TextButton(
-      style: TextButton.styleFrom(
+  ElevatedButton createbutton(String label) {
+    return ElevatedButton(
+      style: ElevatedButton.styleFrom(
+        padding: const EdgeInsets.all(15.0),
         textStyle: const TextStyle(fontSize: 30),
       ),
       onPressed: () {},
