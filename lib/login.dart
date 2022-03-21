@@ -40,7 +40,7 @@ class _LoginState extends State<Login> {
                 )),
               ),
             ),
-            createInputField(false, "Username", Icons.person),
+            createInputField(false, "E-Mail", Icons.person),
             createInputField(true, "Password", Icons.lock),
             Align(
               alignment: Alignment.center,
