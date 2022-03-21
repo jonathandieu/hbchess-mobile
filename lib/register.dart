@@ -56,6 +56,7 @@ class _RegisterState extends State<Register> {
             ),
             const Align(
               alignment: Alignment.center,
+              // need to add another button next to text message
               child: Padding(
                 padding: EdgeInsets.all(20),
                 child: Text(
