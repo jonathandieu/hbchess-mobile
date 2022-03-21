@@ -43,13 +43,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
 
-                // Need to add routing for each ListTile
-                createDrawerTile(Icons.home, 'Home'),
-                createDrawerTile(Icons.leaderboard, 'Leaderboard'),
-                createDrawerTile(Icons.book, 'Rules'),
-                createDrawerTile(Icons.person_add_alt_outlined, 'Sign Up'),
-                createDrawerTile(Icons.login, 'Login'),
-                createDrawerTile(Icons.settings, 'Settings'),
+                // Need to add routing for other ListTiles
+                createDrawerTile(
+                    Icons.home, 'Home', MyHomePage(title: 'HBChess')),
+                //createDrawerTile(Icons.leaderboard, 'Leaderboard'),
+                //createDrawerTile(Icons.book, 'Rules'),
+                createDrawerTile(
+                    Icons.person_add_alt_outlined, 'Sign Up', Register()),
+                createDrawerTile(Icons.login, 'Login', Login()),
+                //createDrawerTile(Icons.settings, 'Settings'),
               ],
             ),
           ),
@@ -100,13 +102,21 @@ class _MyHomePageState extends State<MyHomePage> {
   // Helper function to create Drawer tiles
   // Need to add/update navigator routing once the appropriate
   // pages have been created.
-  ListTile createDrawerTile(IconData icon, String title) {
+  ListTile createDrawerTile(IconData icon, String title, Widget pageToShow) {
     //BuildContext context
     return ListTile(
         leading: Icon(icon),
         title: Text(title),
         onTap: () {
-          Navigator.pop(context);
+          if (pageToShow == MyHomePage) {
+            Navigator.pop(context);
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => pageToShow),
+            );
+          }
+          //Navigator.pop(context);
         });
   }
 
@@ -117,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
         textStyle: const TextStyle(fontSize: 30),
       ),
       onPressed: () {
-          Navigator.push(
+        Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => pageToShow),
         );
