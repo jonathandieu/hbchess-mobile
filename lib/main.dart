@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hb_chess/home.dart';
-import 'splash.dart';
+import '/splash.dart';
+import '/routes.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,8 +17,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.indigo,
       ),
+      routes: Routes.getRoutes,
       // Starts application with splash screen
-      home: Splash(),
+      home: const Splash(),
     );
   }
 }

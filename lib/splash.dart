@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+// import 'screens/home.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -9,6 +9,7 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  @override
   void initState() {
     super.initState();
     _navigatetohome();
@@ -17,15 +18,16 @@ class _SplashState extends State<Splash> {
   // Splash screen to homepage
   _navigatetohome() async {
     const waitSplash = Duration(milliseconds: 1500);
-    const title = 'HBChess';
+    // const title = 'HBChess';
     await Future.delayed(waitSplash, () {});
 
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const MyHomePage(title: title),
-      ),
-    );
+    //Navigator.pushReplacement(
+    //  context,
+    //  MaterialPageRoute(
+     //   builder: (context) => const MyHomePage(title: title),
+     // ),
+    //);
+    Navigator.pushNamed(context, '/home');
   }
 
   // Contents for the splash screen
@@ -45,17 +47,17 @@ class _SplashState extends State<Splash> {
               width: 3,
             ),
             borderRadius: BorderRadius.circular(10.0),
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Colors.black,
-                offset: const Offset(5.0, 5.0),
+                offset: Offset(5.0, 5.0),
                 blurRadius: 5.0,
                 spreadRadius: 1.0,
               ),
             ],
             color: Colors.white,
           ),
-          child: Center(
+          child: const Center(
             child: Text(
               'HBChess',
               style: TextStyle(

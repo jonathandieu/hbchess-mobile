@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hb_chess/leaderboard.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
