@@ -11,6 +11,13 @@ pubspec.lock
 # If you don't generate documentation locally you can remove this line.
 doc/api/
 
+# misc
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
 # Avoid committing generated Javascript files:
 *.dart.js
 *.info.json      # Produced by the --dump-info flag.
