@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hb_chess/utils/user.dart';
+import 'package:http/http.dart' as http;
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -10,13 +10,9 @@ class Login extends StatefulWidget {
 
 class _LoginState extends State<Login> {
 
-  User user = User('', '');
-
+  final TextEditingController _email = TextEditingController();
+  final TextEditingController _password = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-
-  Future doLogin() async {
-
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,10 +61,7 @@ class _LoginState extends State<Login> {
                   child:
                     TextFormField(
                       obscureText: false,
-                      controller: TextEditingController(text: user.email),
-                        onChanged: (value) {
-                          user.email = value;
-                      },
+                      controller: _email,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please fill out field';
@@ -89,11 +82,8 @@ class _LoginState extends State<Login> {
                   padding: const EdgeInsets.only(left:40, right:40),
                   child:
                     TextFormField(
-                      obscureText: false,
-                      controller: TextEditingController(text: user.password),
-                        onChanged: (value) {
-                          user.password = value;
-                        },
+                      obscureText: true,
+                      controller: _password,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
                           return 'Please fill out field';
@@ -122,11 +112,27 @@ class _LoginState extends State<Login> {
                           textStyle: const TextStyle(fontSize: 20),
                           minimumSize: const Size.fromHeight(50),
                         ),
-                      onPressed: () {
+                      onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(content: Text('Processing Data')),
                           );
+
+                          var email = _email.text;
+                          var password = _password.text;
+                          //var jwt = await attemptLogIn(email, password);
+
+                          //if (jwt != null)
+                          //{
+
+                          //}
+                          //else
+                          //{
+                          //  ScaffoldMessenger.of(context).showSnackBar(
+                          //    const SnackBar(content: Text('Error logging in')),
+                          //  ); 
+                          //}
+
                         }
                       }, //FIXME: Actually put in logging in stuff
                       child: const Text('Log In'),
