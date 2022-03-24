@@ -43,14 +43,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
 
                 // Need to add routing for other ListTiles
+                createDrawerTile(Icons.home, 'Home', '/home'),
                 createDrawerTile(
-                    Icons.home, 'Home', '/home'),
-                //createDrawerTile(Icons.leaderboard, 'Leaderboard'),
-                //createDrawerTile(Icons.book, 'Rules'),
+                    Icons.leaderboard, 'Leaderboard', '/leaderboard'),
+                //createDrawerTile(Icons.book, 'Rules', '/rules'),
                 createDrawerTile(
                     Icons.person_add_alt_outlined, 'Sign Up', '/register'),
                 createDrawerTile(Icons.login, 'Login', '/login'),
-                //createDrawerTile(Icons.settings, 'Settings'),
+                //createDrawerTile(Icons.settings, 'Settings', '/settings'),
               ],
             ),
           ),
@@ -110,11 +110,11 @@ class _MyHomePageState extends State<MyHomePage> {
           //if (pageToShow == MyHomePage) {
           //  Navigator.pop(context);
           //} else {
-            //Navigator.push(
-            //  context,
-            //  MaterialPageRoute(builder: (context) => pageToShow),
-            //);
-            Navigator.pushNamed(context, route);
+          //Navigator.push(
+          //  context,
+          //  MaterialPageRoute(builder: (context) => pageToShow),
+          //);
+          Navigator.pushNamed(context, route);
           //}
           //Navigator.pop(context);
         });
