@@ -92,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Column(
                     children: [
                       createbutton('Login', '/login', Colors.indigo, Colors.white),
-                      createbutton('Sign Up', '/register', Color.fromARGB(118, 159, 168, 218), Colors.black),
+                      createbutton('Sign Up', '/register', Color.fromARGB(255, 164, 173, 218), Colors.black),
                     ],
                   ),
                 ],
@@ -136,12 +136,13 @@ class _MyHomePageState extends State<MyHomePage> {
             minimumSize: const Size.fromHeight(50),
             primary: color,
             onPrimary: textColor,
+            side: const BorderSide(
+                width: 1,
+                color: Color.fromARGB(255, 16, 23, 94),
+                style: BorderStyle.solid,
+            ),
           ),
           onPressed: () {
-            //Navigator.push(
-            //  context,
-            //  MaterialPageRoute(builder: (context) => pageToShow),
-            //);
             Navigator.pushNamed(context, route);
           },
           child: Text(label),
