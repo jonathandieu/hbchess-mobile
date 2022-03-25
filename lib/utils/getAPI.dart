@@ -25,6 +25,14 @@ Future<String> doLogin(String email, String password) async
     {
       ret = response.body;
     }
+    else if (response.statusCode == 404)
+    {
+      ret = "URL Not Found";
+    }
+    else
+    {
+      ret = "Invalid Credentials";
+    }
   }
   catch (e)
   {

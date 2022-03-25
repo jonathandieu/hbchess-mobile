@@ -71,17 +71,35 @@ class _LoginState extends State<Login> {
                           var password = _password.text;
                           var token = await doLogin(email, password);
 
-                          if (token != "")
+                          if (token == "Url Not Found" || token == "Invalid Credentials")
+                          {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(token)),
+                            );
+                          }
+                          else if (token == "")
+                          {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text("There was an error logging in")),
+                            );
+                          }
+                          else
                           {
                             storage.write(key: "token", value: token);
                             Navigator.pushNamed(context, '/dashboard');
                           }
-                          else
-                          {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Incorrect credentials')),
-                            );
-                          }
+
+                          // if (token != "")
+                          // {
+                          //   storage.write(key: "token", value: token);
+                          //   Navigator.pushNamed(context, '/dashboard');
+                          // }
+                          // else
+                          // {
+                          //   ScaffoldMessenger.of(context).showSnackBar(
+                          //     const SnackBar(content: Text('Incorrect credentials')),
+                          //   );
+                          // }
                         }
                       },
                       child: const Text('Log In'),
