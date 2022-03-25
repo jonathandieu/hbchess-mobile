@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hb_chess/home.dart';
 import 'splash.dart';
 
 void main() {

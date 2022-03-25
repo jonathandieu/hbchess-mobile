@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 //import 'leaderboard.dart';
+import 'login.dart';
+import 'register.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -41,13 +43,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 ),
 
-                // Need to add routing for each ListTile
-                createDrawerTile(Icons.home, 'Home'),
-                createDrawerTile(Icons.leaderboard, 'Leaderboard'),
-                createDrawerTile(Icons.book, 'Rules'),
-                createDrawerTile(Icons.person_add_alt_outlined, 'Sign Up'),
-                createDrawerTile(Icons.login, 'Login'),
-                createDrawerTile(Icons.settings, 'Settings'),
+                // Need to add routing for other ListTiles
+                createDrawerTile(
+                    Icons.home, 'Home', MyHomePage(title: 'HBChess')),
+                //createDrawerTile(Icons.leaderboard, 'Leaderboard'),
+                //createDrawerTile(Icons.book, 'Rules'),
+                createDrawerTile(
+                    Icons.person_add_alt_outlined, 'Sign Up', Register()),
+                createDrawerTile(Icons.login, 'Login', Login()),
+                //createDrawerTile(Icons.settings, 'Settings'),
               ],
             ),
           ),
@@ -82,8 +86,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   Wrap(
                     spacing: 100,
                     children: [
-                      createbutton('Sign Up'),
-                      createbutton('Login'),
+                      createbutton('Sign Up', Register()),
+                      createbutton('Login', Login()),
                     ],
                   ),
                 ],
@@ -98,23 +102,36 @@ class _MyHomePageState extends State<MyHomePage> {
   // Helper function to create Drawer tiles
   // Need to add/update navigator routing once the appropriate
   // pages have been created.
-  ListTile createDrawerTile(IconData icon, String title) {
+  ListTile createDrawerTile(IconData icon, String title, Widget pageToShow) {
     //BuildContext context
     return ListTile(
         leading: Icon(icon),
         title: Text(title),
         onTap: () {
-          Navigator.pop(context);
+          if (pageToShow == MyHomePage) {
+            Navigator.pop(context);
+          } else {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => pageToShow),
+            );
+          }
+          //Navigator.pop(context);
         });
   }
 
-  ElevatedButton createbutton(String label) {
+  ElevatedButton createbutton(String label, Widget pageToShow) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         padding: const EdgeInsets.all(15.0),
         textStyle: const TextStyle(fontSize: 30),
       ),
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => pageToShow),
+        );
+      },
       child: Text(label),
     );
   }
