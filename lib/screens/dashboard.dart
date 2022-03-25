@@ -10,11 +10,9 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
-        child: Container(
-          child: Text('WOOOOOO YEAH YOU LOGGED IN BUDDY LETS GOOOOOOOOOOOOOOO'),
-        ),
+        child: Text('WOOOOOO YEAH YOU LOGGED IN BUDDY LETS GOOOOOOOOOOOOOOO'),
       ),
     );
   }
