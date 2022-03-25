@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:hb_chess/utils/getAPI.dart';
+import 'package:hb_chess/main.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -48,58 +49,9 @@ class _LoginState extends State<Login> {
                     )),
                   ),
                 ),
-
-
-
-                //createInputField(false, "E-Mail", Icons.person),
-                //createInputField(true, "Password", Icons.lock),
-
-                Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(left:40, right:40),
-                  child:
-                    TextFormField(
-                      obscureText: false,
-                      controller: _email,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please fill out field';
-                        }
-                        return null;
-                      },
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'E-mail',
-                        prefixIcon: Icon(Icons.mail),
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: const EdgeInsets.only(left:40, right:40),
-                  child:
-                    TextFormField(
-                      obscureText: true,
-                      controller: _password,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please fill out field';
-                        }
-                        return null;
-                      },
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Password',
-                        prefixIcon: Icon(Icons.lock),
-                      ),
-                    ),
-                  ),
-                ),
-
-
+                
+                createInputField(false, _email, 'E-Mail', Icons.mail),
+                createInputField(true, _password, 'Password', Icons.lock),
 
                 Align(
                   alignment: Alignment.center,
@@ -114,27 +66,24 @@ class _LoginState extends State<Login> {
                         ),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Processing Data')),
-                          );
 
                           var email = _email.text;
                           var password = _password.text;
-                          //var jwt = await attemptLogIn(email, password);
+                          var token = await doLogin(email, password);
 
-                          //if (jwt != null)
-                          //{
-
-                          //}
-                          //else
-                          //{
-                          //  ScaffoldMessenger.of(context).showSnackBar(
-                          //    const SnackBar(content: Text('Error logging in')),
-                          //  ); 
-                          //}
-
+                          if (token != "")
+                          {
+                            storage.write(key: "token", value: token);
+                            Navigator.pushNamed(context, '/dashboard');
+                          }
+                          else
+                          {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Incorrect credentials')),
+                            );
+                          }
                         }
-                      }, //FIXME: Actually put in logging in stuff
+                      },
                       child: const Text('Log In'),
                       ),
                   ),
@@ -143,25 +92,31 @@ class _LoginState extends State<Login> {
             ),
           ),
       ),
-      
     );
   }
 
-  Align createInputField(bool showText, String placeholder, IconData icon) {
+  Align createInputField(bool showText, TextEditingController controllerType, String placeholder, IconData icon) {
     return Align(
-            alignment: Alignment.center,
-            child: Padding(
-              padding: const EdgeInsets.only(left:40, right:40),
-              child:
-                TextField(
-                  obscureText: showText,
-                  decoration: InputDecoration(
-                    border: const OutlineInputBorder(),
-                    hintText: placeholder,
-                    prefixIcon: Icon(icon),
-                  ),
-                ),
+      alignment: Alignment.center,
+      child: Padding(
+        padding: const EdgeInsets.only(left:40, right:40),
+        child:
+          TextFormField(
+            obscureText: showText,
+            controller: controllerType,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please fill out field';
+              }
+              return null;
+            },
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(),
+              hintText: placeholder,
+              prefixIcon: Icon(icon),
             ),
-          );
-  }
+          ),
+        ),
+      );
+    }
 }
