@@ -17,6 +17,7 @@ doc/api/
 .env.development.local
 .env.test.local
 .env.production.local
+.flutter-*
 
 # Avoid committing generated Javascript files:
 *.dart.js
