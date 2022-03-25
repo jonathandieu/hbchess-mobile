@@ -23,22 +23,22 @@ class _SplashState extends State<Splash> {
     const waitSplash = Duration(milliseconds: 1500);
     await Future.delayed(waitSplash, () {});
 
-    if (userToken != null)
-    {
-      bool hasExpired = JwtDecoder.isExpired(userToken);
-      if (!hasExpired)
+      if (userToken != null)
       {
-        Navigator.pushNamed(context, '/dashboard');
+        bool hasExpired = JwtDecoder.isExpired(userToken);
+        if (!hasExpired)
+        {
+          Navigator.pushNamed(context, '/dashboard');
+        }
+        else
+        {
+          Navigator.pushNamed(context, '/home');
+        }
       }
       else
       {
-        Navigator.pushNamed(context, '/home');
+       Navigator.pushNamed(context, '/home');
       }
-    }
-    else
-    {
-      Navigator.pushNamed(context, '/home');
-    }
   }
 
   // Contents for the splash screen

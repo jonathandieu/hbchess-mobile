@@ -30,7 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 const DrawerHeader(
                   decoration: BoxDecoration(
                     color: Colors.indigo,
-                  ),
+                    ),
                   child: Text(
                     'HBChess',
                     style: TextStyle(
@@ -81,12 +81,18 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  const SizedBox(height: 100),
-                  Wrap(
-                    spacing: 100,
+                  const SizedBox(height: 30),
+                  // Wrap(
+                  //   spacing: 100,
+                  //   children: [
+                  //     createbutton('Sign Up', '/register'),
+                  //     createbutton('Login', '/login'),
+                  //   ],
+                  // ),
+                  Column(
                     children: [
-                      createbutton('Sign Up', '/register'),
-                      createbutton('Login', '/login'),
+                      createbutton('Login', '/login', Colors.indigo, Colors.white),
+                      createbutton('Sign Up', '/register', Color.fromARGB(118, 159, 168, 218), Colors.black),
                     ],
                   ),
                 ],
@@ -120,20 +126,27 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  ElevatedButton createbutton(String label, String route) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        padding: const EdgeInsets.all(15.0),
-        textStyle: const TextStyle(fontSize: 30),
-      ),
-      onPressed: () {
-        //Navigator.push(
-        //  context,
-        //  MaterialPageRoute(builder: (context) => pageToShow),
-        //);
-        Navigator.pushNamed(context, route);
-      },
-      child: Text(label),
+  Padding createbutton(String label, String route, Color color, Color textColor) {
+    return Padding(
+      padding: const EdgeInsets.only(left:40, right:40, top:10),
+      child: 
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            textStyle: const TextStyle(fontSize: 30),
+            minimumSize: const Size.fromHeight(50),
+            primary: color,
+            onPrimary: textColor,
+          ),
+          onPressed: () {
+            //Navigator.push(
+            //  context,
+            //  MaterialPageRoute(builder: (context) => pageToShow),
+            //);
+            Navigator.pushNamed(context, route);
+          },
+          child: Text(label),
+        )
     );
   }
+
 }
