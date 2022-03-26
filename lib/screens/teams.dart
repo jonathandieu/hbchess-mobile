@@ -14,9 +14,30 @@ class _TeamsState extends State<Teams> {
       appBar: AppBar(
         title: const Text("Teams"),
       ),
-      body: const Center(
-        child: Text('Teams page'),
-      ),
+      body: ListView(
+          children: <Widget> [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: const Color.fromARGB(255, 109, 120, 185),
+                      textStyle: const TextStyle(fontSize: 20),
+                      minimumSize: const Size.fromHeight(50),
+                      side: const BorderSide(
+                          width: 1,
+                          color: Color.fromARGB(255, 16, 23, 94),
+                          style: BorderStyle.solid,
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/addTeams');
+                    },
+                    child: const Text("Pending Invites"),
+                  ),
+              ),
+          ],
+        )
+    
     );
   }
 }
