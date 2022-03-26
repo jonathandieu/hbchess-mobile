@@ -11,10 +11,11 @@ class _LeaderboardState extends State<Leaderboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          child: Text('This is a leaderboard'),
-        ),
+      appBar: AppBar(
+        title: const Text("Leaderboard"),
+      ),
+      body: const Center(
+        child: Text('This is a leaderboard'),
       ),
     );
   }
