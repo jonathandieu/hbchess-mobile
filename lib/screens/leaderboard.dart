@@ -31,41 +31,64 @@ class _LeaderboardState extends State<Leaderboard> {
         centerTitle: true,
         title: const Text("Leaderboard"),
       ),
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                return Card(
-                  margin: const EdgeInsets.all(5),
-                  child: Container(
-                    height: 80,
-                    alignment: Alignment.center,
-                    child: Row(
-                      children: <Widget>[
-                        // #
-                        Expanded(
-                          child:
-                              Text('${index + 1}', textAlign: TextAlign.center),
-                        ),
-                        // Team
-                        Expanded(
-                          child: Text('${teams[index][0]}',
-                              textAlign: TextAlign.center),
-                        ),
-                        // Rank
-                        Expanded(
-                          child: Text('${teams[index][1]}',
-                              textAlign: TextAlign.center),
-                        ),
-                        /*
+      body: Column(
+        children: [
+          // Leaderboard header
+          Expanded(
+            child: Row(
+              children: const <Widget>[
+                Expanded(
+                  child: Text('#', textAlign: TextAlign.center),
+                ),
+                Expanded(
+                  child: Text('Team', textAlign: TextAlign.center),
+                ),
+                Expanded(
+                  child: Text('Rank', textAlign: TextAlign.center),
+                ),
+              ],
+            ),
+          ),
+          // Scrollable list
+          Expanded(
+            child: CustomScrollView(
+              slivers: <Widget>[
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return Card(
+                        margin: const EdgeInsets.all(5),
+                        child: Container(
+                          height: 80,
+                          alignment: Alignment.center,
+                          child: Row(
+                            children: <Widget>[
+                              // #
+                              Expanded(
+                                child: Text('${index + 1}',
+                                    textAlign: TextAlign.center),
+                              ),
+                              // Team
+                              Expanded(
+                                child: Text('${teams[index][0]}',
+                                    textAlign: TextAlign.center),
+                              ),
+                              // Rank
+                              Expanded(
+                                child: Text('${teams[index][1]}',
+                                    textAlign: TextAlign.center),
+                              ),
+                              /*
                         */
-                      ],
-                    ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    childCount: teams.length,
                   ),
-                );
-              },
-              childCount: teams.length,
+                ),
+              ],
             ),
           ),
         ],
