@@ -34,21 +34,29 @@ class _LeaderboardState extends State<Leaderboard> {
       body: Column(
         children: [
           // Leaderboard header
-          Expanded(
-            child: Row(
-              children: const <Widget>[
-                Expanded(
-                  child: Text('#', textAlign: TextAlign.center),
-                ),
-                Expanded(
-                  child: Text('Team', textAlign: TextAlign.center),
-                ),
-                Expanded(
-                  child: Text('Rank', textAlign: TextAlign.center),
-                ),
-              ],
+          ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: 100,
+              maxWidth: 500,
+            ),
+            child: Container(
+              color: Color.fromARGB(255, 211, 211, 211),
+              child: Row(
+                children: const <Widget>[
+                  Expanded(
+                    child: Text('#', textAlign: TextAlign.center),
+                  ),
+                  Expanded(
+                    child: Text('Team', textAlign: TextAlign.center),
+                  ),
+                  Expanded(
+                    child: Text('Rank', textAlign: TextAlign.center),
+                  ),
+                ],
+              ),
             ),
           ),
+
           // Scrollable list
           Expanded(
             child: CustomScrollView(
