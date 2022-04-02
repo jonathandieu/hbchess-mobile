@@ -20,7 +20,19 @@ Future<String> doRegister(
         encoding: Encoding.getByName("utf-8"));
 
     if (response.statusCode == 201) {
-      ret = "Account Successfully Created";
+      //ret = "Account Successfully Created";
+      try {
+        http.Response response2 = await http.get(
+          Uri.parse(url + '/verify-user'),
+        );
+        if (response2.statusCode == 200) {
+          ret = "Account Successfully Created";
+        } else if (response2.statusCode == 400) {
+          ret = "Invalid emailToken";
+        }
+      } catch (e) {
+        print(e.toString());
+      }
     } else if (response.statusCode == 400) {
       ret = "Invalid user data";
     } else if (response.statusCode == 404) {
