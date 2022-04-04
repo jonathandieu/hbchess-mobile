@@ -1,0 +1,3 @@
+Teams are made up of two players. One player will be the brain and the other is the hand.
+The brain will call out the name of a piece, and the hand has to decide which of those pieces to move and where they want to move that piece to.
+Teammates cannot communicate where they want a piece to go. Otherwise normal chess rules apply.
