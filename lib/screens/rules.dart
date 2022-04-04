@@ -36,7 +36,7 @@ class _RulesState extends State<Rules> {
                   ),
                   const SizedBox(height: 25),
                   const Text(
-                    'Roles',
+                    'Description of Roles',
                     style: TextStyle(fontSize: 40),
                   ),
                   const SizedBox(height: 25),
