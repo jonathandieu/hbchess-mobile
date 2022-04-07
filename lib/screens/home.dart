@@ -43,7 +43,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
 
                 // Need to add routing for other ListTiles
+                createDrawerTile(Icons.home, 'Home', '/home'),
                 createDrawerTile(
+                    Icons.leaderboard, 'Leaderboard', '/leaderboard'),
+                //createDrawerTile(Icons.book, 'Rules', '/rules'),
+                createDrawerTile(
+                    Icons.person_add_alt_outlined, 'Sign Up', '/register'),
+                createDrawerTile(Icons.login, 'Login', '/login'),
+                //createDrawerTile(Icons.settings, 'Settings', '/settings'),
                     Icons.home, 'Home', '/home'),
                 createDrawerTile(Icons.leaderboard, 'Leaderboard', '/leaderboard'),
                 createDrawerTile(Icons.book, 'Rules', '/rules'),
@@ -112,7 +119,7 @@ class _MyHomePageState extends State<MyHomePage> {
         leading: Icon(icon),
         title: Text(title),
         onTap: () {
-            Navigator.pushNamed(context, route);
+          Navigator.pushNamed(context, route);
         });
   }
 

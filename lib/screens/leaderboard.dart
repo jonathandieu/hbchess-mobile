@@ -14,6 +14,7 @@ List<List> teams = [
   ['White', 'D']
 ];
 
+// need to add lazy loading for leaderboard entries
 class Leaderboard extends StatefulWidget {
   const Leaderboard({Key? key}) : super(key: key);
 
