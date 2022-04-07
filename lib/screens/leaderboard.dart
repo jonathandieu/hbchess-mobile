@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Dummy leaderboard entries
-final List<String> playerRankings = <String>['A', 'B', 'C'];
-
+// Dummy data to test leaderboard page
 List<List> teams = [
   ['Red', 'A'],
   ['Blue', 'B'],
@@ -25,38 +23,12 @@ class Leaderboard extends StatefulWidget {
 }
 
 class _LeaderboardState extends State<Leaderboard> {
+  List<List> players = getPlayers();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Leaderboard"),
-      ),
-      body: Stack(
-        children: <Widget>[
-          Column(),
-          ListView.separated(
-            padding: const EdgeInsets.all(25),
-            itemCount: playerRankings.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                height: 50,
-                color: Color.fromARGB(255, 200, 225, 236),
-                child: Center(
-                  child: Row(
-                    children: <Widget>[
-                      Expanded(
-                        child: Text(
-                          '# ${index + 1} - ${playerRankings[index]}',
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
         centerTitle: true,
         title: const Text("Leaderboard"),
       ),
@@ -134,9 +106,6 @@ class _LeaderboardState extends State<Leaderboard> {
   }
 }
 
-<<<<<<< re-organization
-//createListTile(String player) {}
-=======
 // FIXME: Update once rankings are available
 List<List> getPlayers() {
   return teams;

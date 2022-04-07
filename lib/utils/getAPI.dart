@@ -1,32 +1,42 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-const URL = 'https://hbchess.app/api/users';
-//const USER_COLLECTIONS = ""; // Collection name
+const url = 'https://hbchess.app/api/users';
 
-//const URL = 'https://cop4331-10.herokuapp.com/api/login';
-
-class CardsData {
-  static Future<String> getJson(String outgoing) async
+Future<String> doLogin(String email, String password) async
+{
+  String ret = "";
+  try
   {
-    String ret = "";
-    try
+    http.Response response = await http.post(Uri.parse(url + '/login'),
+        body: jsonEncode({
+          "email": email,
+          "password": password,
+        }),
+        headers:
+        {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        encoding: Encoding.getByName("utf-8")
+    );
+
+    if (response.statusCode == 200)
     {
-      http.Response response = await http.post(Uri.parse(URL),
-          body: utf8.encode(outgoing),
-          headers:
-          {
-            "Accept": "application/json",
-            "Content-Type": "application/json",
-          },
-          encoding: Encoding.getByName("utf-8")
-      );
       ret = response.body;
     }
-    catch (e)
+    else if (response.statusCode == 404)
     {
-      print(e.toString());
+      ret = "URL Not Found";
     }
-    return ret;
+    else
+    {
+      ret = "Invalid Credentials";
+    }
   }
+  catch (e)
+  {
+    print(e.toString());
+  }
+  return ret;
 }

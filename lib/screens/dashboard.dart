@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hb_chess/main.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -8,14 +10,55 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
-          child: Text('WOOOOOO YEAH YOU LOGGED IN BUDDY LETS GOOOOOOOOOOOOOOO'),
+    return Stack(
+      children: [
+        Scaffold(
+          appBar: AppBar(
+            title: const Text('Dashboard'),
+          ),
+          drawer: Drawer(
+            child: ListView(
+                  padding: EdgeInsets.zero,
+                  children: [
+                    const DrawerHeader(
+                      decoration: BoxDecoration(
+                        color: Colors.indigo,
+                        ),
+                      child: Text(
+                        'HBChess',
+                        style: TextStyle(
+                          fontSize: 28,
+                          color: Colors.white,
+                          fontFamily: 'Poppins-Regular',
+                        ),
+                      ),
+                    ),
+                    createDrawerTile(Icons.home, 'Dashboard', '/dashboard'),
+                    createDrawerTile(Icons.leaderboard, 'Leaderboard', '/leaderboard'),
+                    createDrawerTile(Icons.book, 'Rules', '/rules'),
+                    createDrawerTile(Icons.person, 'Teams', '/teams'),
+                    createDrawerTile(Icons.settings, 'Settings', '/settings'),
+                  ],
+            ),
+          ),
+          body: const Center(
+            child: Text('dashboard stuff here'),
+          ),
         ),
-      ),
+      ],
     );
+  }
+
+    ListTile createDrawerTile(IconData icon, String title, String route) {
+    //BuildContext context
+    return ListTile(
+        leading: Icon(icon),
+        title: Text(title),
+        onTap: () {
+            Navigator.pushNamed(context, route);
+        });
   }
 }
