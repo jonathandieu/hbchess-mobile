@@ -51,6 +51,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     Icons.person_add_alt_outlined, 'Sign Up', '/register'),
                 createDrawerTile(Icons.login, 'Login', '/login'),
                 //createDrawerTile(Icons.settings, 'Settings', '/settings'),
+                    Icons.home, 'Home', '/home'),
+                createDrawerTile(Icons.leaderboard, 'Leaderboard', '/leaderboard'),
+                createDrawerTile(Icons.book, 'Rules', '/rules'),
+                createDrawerTile(
+                    Icons.person_add_alt_outlined, 'Sign Up', '/register'),
+                createDrawerTile(Icons.login, 'Login', '/login'),
               ],
             ),
           ),
@@ -107,16 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
         leading: Icon(icon),
         title: Text(title),
         onTap: () {
-          //if (pageToShow == MyHomePage) {
-          //  Navigator.pop(context);
-          //} else {
-          //Navigator.push(
-          //  context,
-          //  MaterialPageRoute(builder: (context) => pageToShow),
-          //);
           Navigator.pushNamed(context, route);
-          //}
-          //Navigator.pop(context);
         });
   }
 
