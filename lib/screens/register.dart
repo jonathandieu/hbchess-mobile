@@ -33,6 +33,7 @@ class _RegisterState extends State<Register> {
                   child: Text(
                     'Welcome to Hand Brain Chess!',
                     style: TextStyle(fontSize: 38, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
                   ),
                 ),
               ),

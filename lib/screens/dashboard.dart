@@ -10,7 +10,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -21,27 +20,28 @@ class _DashboardState extends State<Dashboard> {
           ),
           drawer: Drawer(
             child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: [
-                    const DrawerHeader(
-                      decoration: BoxDecoration(
-                        color: Colors.indigo,
-                        ),
-                      child: Text(
-                        'HBChess',
-                        style: TextStyle(
-                          fontSize: 28,
-                          color: Colors.white,
-                          fontFamily: 'Poppins-Regular',
-                        ),
-                      ),
+              padding: EdgeInsets.zero,
+              children: [
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 31, 41, 55),
+                  ),
+                  child: Text(
+                    'HBChess',
+                    style: TextStyle(
+                      fontSize: 28,
+                      color: Colors.white,
+                      fontFamily: 'Poppins-Regular',
                     ),
-                    createDrawerTile(Icons.home, 'Dashboard', '/dashboard'),
-                    createDrawerTile(Icons.leaderboard, 'Leaderboard', '/leaderboard'),
-                    createDrawerTile(Icons.book, 'Rules', '/rules'),
-                    createDrawerTile(Icons.person, 'Teams', '/teams'),
-                    createDrawerTile(Icons.settings, 'Settings', '/settings'),
-                  ],
+                  ),
+                ),
+                createDrawerTile(Icons.home, 'Dashboard', '/dashboard'),
+                createDrawerTile(
+                    Icons.leaderboard, 'Leaderboard', '/leaderboard'),
+                createDrawerTile(Icons.book, 'Rules', '/rules'),
+                createDrawerTile(Icons.person, 'Teams', '/teams'),
+                createDrawerTile(Icons.settings, 'Settings', '/settings'),
+              ],
             ),
           ),
           body: const Center(
@@ -52,13 +52,13 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-    ListTile createDrawerTile(IconData icon, String title, String route) {
+  ListTile createDrawerTile(IconData icon, String title, String route) {
     //BuildContext context
     return ListTile(
         leading: Icon(icon),
         title: Text(title),
         onTap: () {
-            Navigator.pushNamed(context, route);
+          Navigator.pushNamed(context, route);
         });
   }
 }
