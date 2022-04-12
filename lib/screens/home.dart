@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   const Text(
                     'Play Hand Brain Chess With Friends!',
                     style: TextStyle(
-                        fontSize: 48,
+                        fontSize: 28,
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 31, 41, 55)
                         //fontFamily: 'Poppins-Regular',
@@ -88,6 +88,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 30),
+                  FittedBox(
+                    child: Image.asset(
+                      "assets/images/hblogo.png",
+                      width: 300,
+                      height: 300,
+                    ),
+                    fit: BoxFit.fitHeight,
+                  ),
                   // Wrap(
                   //   spacing: 100,
                   //   children: [
