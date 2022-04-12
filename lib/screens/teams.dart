@@ -1,5 +1,20 @@
 import 'package:flutter/material.dart';
 
+// Dummy data to test Teams page
+List<List> teams = [
+  ['Red'],
+  ['Blue'],
+  ['Green'],
+  ['Yellow'],
+  ['Pink'],
+  ['Orange'],
+  ['Purple'],
+  ['Gray'],
+  ['Black'],
+  ['White']
+];
+
+// need to add lazy loading for Teams entries
 class Teams extends StatefulWidget {
   const Teams({Key? key}) : super(key: key);
 
@@ -8,15 +23,24 @@ class Teams extends StatefulWidget {
 }
 
 class _TeamsState extends State<Teams> {
+  List<List> players = getPlayers();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Teams"),
-        ),
-        body: ListView(
-          children: <Widget>[
-            Padding(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Teams"),
+      ),
+      body: Column(
+        children: [
+          // Teams header
+          ConstrainedBox(
+            constraints: const BoxConstraints(
+              minHeight: 100,
+              maxWidth: 500,
+            ),
+            child: Padding(
               padding: const EdgeInsets.all(10),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -35,7 +59,75 @@ class _TeamsState extends State<Teams> {
                 child: const Text("Pending Invites"),
               ),
             ),
-          ],
-        ));
+          ),
+
+          // Scrollable list
+          Expanded(
+            child: CustomScrollView(
+              slivers: <Widget>[
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return Card(
+                        margin: const EdgeInsets.all(5),
+                        child: Container(
+                          height: 80,
+                          alignment: Alignment.center,
+                          child: Row(
+                            children: <Widget>[
+                              // Name
+                              Expanded(
+                                child: Text('${teams[index][0]}',
+                                    textAlign: TextAlign.center),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    childCount: teams.length,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
+}
+
+// FIXME: Update once rankings are available
+List<List> getPlayers() {
+  return teams;
+}
+
+createPlayerCard(String team, String rank) {
+  return Card(
+    margin: const EdgeInsets.all(8.0),
+    elevation: 5.0,
+    child: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Flexible(
+              fit: FlexFit.tight,
+              child: Text(
+                team,
+                style: const TextStyle(fontSize: 18),
+              )),
+          Flexible(
+            flex: 2,
+            fit: FlexFit.tight,
+            child: Text(
+              rank,
+              style:
+                  const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
