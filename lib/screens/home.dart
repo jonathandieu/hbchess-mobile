@@ -29,8 +29,9 @@ class _MyHomePageState extends State<MyHomePage> {
               children: [
                 const DrawerHeader(
                   decoration: BoxDecoration(
-                    color: Colors.indigo,
-                    ),
+                    // R, G, B, opacity
+                    color: Color.fromARGB(255, 31, 41, 55),
+                  ),
                   child: Text(
                     'HBChess',
                     style: TextStyle(
@@ -51,10 +52,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     Icons.person_add_alt_outlined, 'Sign Up', '/register'),
                 createDrawerTile(Icons.login, 'Login', '/login'),
                 //createDrawerTile(Icons.settings, 'Settings', '/settings'),
-                    Icons.home, 'Home', '/home'),
-                createDrawerTile(Icons.leaderboard, 'Leaderboard', '/leaderboard'),
+                //Icons.home, 'Home', '/home'),
+                createDrawerTile(
+                    Icons.leaderboard, 'Leaderboard', '/leaderboard'),
                 createDrawerTile(Icons.book, 'Rules', '/rules'),
-
               ],
             ),
           ),
@@ -68,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   fit: BoxFit.fill,
-                  image: AssetImage("assets/images/background.jpg"),
+                  image: AssetImage("assets/images/background3.jpg"),
                 ),
               ),
               child: Column(
@@ -79,10 +80,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   const Text(
                     'Play Hand Brain Chess With Friends!',
                     style: TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                      //fontFamily: 'Poppins-Regular',
-                    ),
+                        fontSize: 48,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 31, 41, 55)
+                        //fontFamily: 'Poppins-Regular',
+                        ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 30),
@@ -95,8 +97,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   // ),
                   Column(
                     children: [
-                      createbutton('Login', '/login', Colors.indigo, Colors.white),
-                      createbutton('Sign Up', '/register', Color.fromARGB(255, 164, 173, 218), Colors.black),
+                      createbutton('Login', '/login',
+                          const Color.fromARGB(255, 31, 41, 55), Colors.white),
+                      createbutton('Sign Up', '/register',
+                          const Color.fromARGB(141, 31, 41, 55), Colors.white),
                     ],
                   ),
                 ],
@@ -121,28 +125,26 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
-  Padding createbutton(String label, String route, Color color, Color textColor) {
+  Padding createbutton(
+      String label, String route, Color color, Color textColor) {
     return Padding(
-      padding: const EdgeInsets.only(left:40, right:40, top:10),
-      child: 
-        ElevatedButton(
+        padding: const EdgeInsets.only(left: 40, right: 40, top: 10),
+        child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             textStyle: const TextStyle(fontSize: 30),
             minimumSize: const Size.fromHeight(50),
             primary: color,
             onPrimary: textColor,
             side: const BorderSide(
-                width: 1,
-                color: Color.fromARGB(255, 16, 23, 94),
-                style: BorderStyle.solid,
+              width: 1,
+              color: Color.fromARGB(31, 16, 23, 94),
+              style: BorderStyle.solid,
             ),
           ),
           onPressed: () {
             Navigator.pushNamed(context, route);
           },
           child: Text(label),
-        )
-    );
+        ));
   }
-
 }

@@ -5,6 +5,19 @@ import '/routes.dart';
 
 final storage = FlutterSecureStorage();
 
+Map<int, Color> color = {
+  50: const Color.fromARGB(31, 41, 55, 100),
+  100: const Color.fromARGB(31, 41, 55, 100),
+  200: const Color.fromARGB(31, 41, 55, 100),
+  300: const Color.fromARGB(31, 41, 55, 100),
+  400: const Color.fromARGB(31, 41, 55, 100),
+  500: const Color.fromARGB(31, 41, 55, 100),
+  600: const Color.fromARGB(31, 41, 55, 100),
+  700: const Color.fromARGB(31, 41, 55, 100),
+  800: const Color.fromARGB(31, 41, 55, 100),
+  900: const Color.fromARGB(31, 41, 55, 100),
+};
+
 void main() {
   runApp(const MyApp());
 }
@@ -18,7 +31,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'HB Chess Home',
       theme: ThemeData(
-        primarySwatch: Colors.indigo,
+        primarySwatch: MaterialColor(0xFF1f2937, color),
       ),
       routes: Routes.getRoutes,
       // Starts application with splash screen

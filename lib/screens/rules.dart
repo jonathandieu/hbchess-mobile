@@ -46,7 +46,7 @@ class _RulesState extends State<Rules> {
                   // Hand rule card
                   Card(
                     margin: const EdgeInsets.all(5),
-                    color: Colors.indigo,
+                    color: const Color.fromARGB(255, 31, 41, 55),
                     child: InkWell(
                       splashColor: Colors.white.withAlpha(50),
                       onTap: () {
@@ -68,7 +68,7 @@ class _RulesState extends State<Rules> {
                   // Brain rule card
                   Card(
                     margin: const EdgeInsets.all(5),
-                    color: Colors.indigo,
+                    color: const Color.fromARGB(255, 31, 41, 55),
                     child: InkWell(
                       splashColor: Colors.white.withAlpha(50),
                       onTap: () {
