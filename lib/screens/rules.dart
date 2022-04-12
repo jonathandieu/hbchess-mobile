@@ -26,19 +26,22 @@ class _RulesState extends State<Rules> {
                     'How to Play',
                     style: TextStyle(fontSize: 40),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 25),
 
                   // There is probably a better way to add this text. Look into file imports
                   const Text(
-                    "Teams are made up of two players. One player will be the brain and the other is the hand. The brain will call out the name of a piece, and the hand has to decide which of those pieces to move and where they want to move that piece to. Teammates cannot communicate where they want a piece to go. Otherwise normal chess rules apply.",
+                    "Hand and Brain chess is a chess variant intended to play in pairs. One player will be the brain, and the other is the hand. The brain calls out a piece, and the hand chooses how and where to move that piece. Normal chess rules still apply. Tap a card below to learn more about each role.",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 20),
                   ),
-                  const SizedBox(height: 25),
+
+                  // space between headers
+                  /*const SizedBox(height: 60),
                   const Text(
-                    'Roles',
+                    'Description of Roles',
                     style: TextStyle(fontSize: 40),
                   ),
+                  */
                   const SizedBox(height: 25),
                   // Hand rule card
                   Card(
@@ -51,7 +54,7 @@ class _RulesState extends State<Rules> {
                         _showHandRules(context);
                       },
                       child: Container(
-                        height: 100,
+                        height: 150,
                         width: 325,
                         alignment: Alignment.center,
                         child: const Text(
@@ -61,7 +64,7 @@ class _RulesState extends State<Rules> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 15),
+                  const SizedBox(height: 25),
                   // Brain rule card
                   Card(
                     margin: const EdgeInsets.all(5),
@@ -73,7 +76,7 @@ class _RulesState extends State<Rules> {
                         _showBrainRules(context);
                       },
                       child: Container(
-                        height: 100,
+                        height: 150,
                         width: 325,
                         alignment: Alignment.center,
                         child: const Text(
@@ -108,7 +111,15 @@ _showBrainRules(BuildContext context) async {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('The Brain rules will go here'),
+                child: Container(
+                  height: 250,
+                  width: 325,
+                  alignment: Alignment.center,
+                  child: const Text(
+                    'The brain has the role of choosing which piece the hand player has to choose from. The brain can call out any piece as long as it has a legal move. They CANNOT hint the moves they would like a piece to make. That decision is completely up to the hand.',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
               ),
             ],
           ),
@@ -128,7 +139,15 @@ _showHandRules(BuildContext context) async {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('The Hand rules will go here'),
+                child: Container(
+                  height: 250,
+                  width: 325,
+                  alignment: Alignment.center,
+                  child: const Text(
+                    'The hand has the role of choosing which piece to move depending on what the brain has decided to call out. The hand should only move pieces that are called by the brain even if the only possible moves are bad.',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
               ),
             ],
           ),

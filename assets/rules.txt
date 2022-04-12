@@ -1,3 +1,3 @@
-Teams are made up of two players. One player will be the brain and the other is the hand.
-The brain will call out the name of a piece, and the hand has to decide which of those pieces to move and where they want to move that piece to.
-Teammates cannot communicate where they want a piece to go. Otherwise normal chess rules apply.
+Hand and Brain chess is a chess variant intended to play in pairs. One player will be the brain, and the other is the hand. The brain calls out a piece, and the hand chooses how and where to move that piece. Tap a role card below to learn more about each role.
+
+The hand has the role of choosing which piece to move depending on what the brain has decided to call out. The hand should only move pieces that are called by the brain even if the only possible moves are bad.
