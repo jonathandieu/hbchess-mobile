@@ -47,44 +47,84 @@ class _DashboardState extends State<Dashboard> {
 
           // This is the main item to edit for dashboard
           body: Center(
-            child: Column(
-              children: <Widget>[
-                // 1st item
-                const Padding(
-                  padding: EdgeInsets.all(15),
-                  child: Text(
-                    'My Stats',
-                    style: TextStyle(fontSize: 35),
-                    textAlign: TextAlign.center,
+            // Center is a layout widget. It takes a single child and positions it
+            // in the middle of the parent.
+            child: Column(children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.all(15),
+                child: Text(
+                  'My Stats',
+                  style: TextStyle(fontSize: 30),
+                ),
+              ),
+              ConstrainedBox(
+                constraints: const BoxConstraints(
+                  minHeight: 100,
+                  maxWidth: 325,
+                ),
+                child: Container(
+                  color:
+                      const Color.fromARGB(255, 211, 211, 211), // color of box
+                  child: Column(
+                    children: [
+                      Row(
+                        children: const <Widget>[
+                          Expanded(
+                            child: Text('Wins',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20),
+                                textAlign: TextAlign.center),
+                          ),
+                          Expanded(
+                            child: Text('Draws',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20),
+                                textAlign: TextAlign.center),
+                          ),
+                          Expanded(
+                            child: Text('Losses',
+                                style: TextStyle(
+                                    color: Colors.black, fontSize: 20),
+                                textAlign: TextAlign.center),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(
-                    minHeight: 500,
-                    maxWidth: 500,
-                    //width: 500,
-                  ),
-                  child: Card(
-                    color: const Color.fromARGB(255, 211, 211, 211),
-                    child: Row(
+              ),
+              const SizedBox(height: 25),
+              ConstrainedBox(
+                constraints: const BoxConstraints(
+                  minHeight: 300,
+                  maxWidth: 325,
+                ),
+                child: Container(
+                  color:
+                      const Color.fromARGB(255, 211, 211, 211), // color of box
+                  child: Column(children: [
+                    const Text('Previous Games',
+                        style: TextStyle(color: Colors.black, fontSize: 25)),
+                    Row(
                       children: const <Widget>[
                         Expanded(
-                          child: Text('Wins', textAlign: TextAlign.center),
+                          child: Text('Teams',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20),
+                              textAlign: TextAlign.center),
                         ),
-                        // Team
                         Expanded(
-                          child: Text('Draw', textAlign: TextAlign.center),
-                        ),
-                        // Rank
-                        Expanded(
-                          child: Text('Loss', textAlign: TextAlign.center),
+                          child: Text('Result',
+                              style:
+                                  TextStyle(color: Colors.black, fontSize: 20),
+                              textAlign: TextAlign.center),
                         ),
                       ],
                     ),
-                  ),
+                  ]),
                 ),
-              ],
-            ),
+              ),
+            ]),
           ),
         ),
       ],
