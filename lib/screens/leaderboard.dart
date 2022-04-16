@@ -36,12 +36,12 @@ class _LeaderboardState extends State<Leaderboard> {
         children: [
           // Leaderboard header
           ConstrainedBox(
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
               minHeight: 100,
               maxWidth: 500,
             ),
             child: Container(
-              color: Color.fromARGB(255, 211, 211, 211),
+              color: const Color.fromARGB(255, 211, 211, 211),
               child: Row(
                 children: const <Widget>[
                   Expanded(

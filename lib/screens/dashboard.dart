@@ -44,8 +44,47 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
           ),
-          body: const Center(
-            child: Text('dashboard stuff here'),
+
+          // This is the main item to edit for dashboard
+          body: Center(
+            child: Column(
+              children: <Widget>[
+                // 1st item
+                const Padding(
+                  padding: EdgeInsets.all(15),
+                  child: Text(
+                    'My Stats',
+                    style: TextStyle(fontSize: 35),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    minHeight: 500,
+                    maxWidth: 500,
+                    //width: 500,
+                  ),
+                  child: Card(
+                    color: const Color.fromARGB(255, 211, 211, 211),
+                    child: Row(
+                      children: const <Widget>[
+                        Expanded(
+                          child: Text('Wins', textAlign: TextAlign.center),
+                        ),
+                        // Team
+                        Expanded(
+                          child: Text('Draw', textAlign: TextAlign.center),
+                        ),
+                        // Rank
+                        Expanded(
+                          child: Text('Loss', textAlign: TextAlign.center),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
