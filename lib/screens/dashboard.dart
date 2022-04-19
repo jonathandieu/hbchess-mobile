@@ -60,7 +60,7 @@ class _DashboardState extends State<Dashboard> {
               ConstrainedBox(
                 constraints: const BoxConstraints(
                   minHeight: 100,
-                  maxWidth: 325,
+                  maxWidth: 525,
                 ),
                 child: Container(
                   color:
@@ -103,8 +103,10 @@ class _DashboardState extends State<Dashboard> {
                   color:
                       const Color.fromARGB(255, 211, 211, 211), // color of box
                   child: Column(children: [
-                    const Text('Previous Games',
-                        style: TextStyle(color: Colors.black, fontSize: 25)),
+                    const Expanded(
+                      child: Text('Previous Games',
+                          style: TextStyle(color: Colors.black, fontSize: 25)),
+                    ),
                     Row(
                       children: const <Widget>[
                         Expanded(

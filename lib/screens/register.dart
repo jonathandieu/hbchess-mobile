@@ -81,7 +81,6 @@ class _RegisterState extends State<Register> {
                           );
                         } else {
                           storage.write(key: "token", value: token);
-                          //FIXME: ADD email verification here!
                           Navigator.pushNamed(context, '/login');
                         }
                       }
