@@ -50,6 +50,15 @@ class _TeamsAddState extends State<TeamsAdd> {
                         (BuildContext context, int index) {
                           return Card(
                           margin: const EdgeInsets.all(5),
+                          color: index % 2 == 0
+                            ? Color.fromARGB(218, 241, 241, 241)
+                            : Color.fromARGB(255, 187, 187, 187),
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: Color.fromARGB(255, 31, 41, 55),
+                              width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                           child: Container(
                             height: 80,
                             alignment: Alignment.center,

@@ -68,6 +68,15 @@ class _TeamsState extends State<Teams> {
                     (BuildContext context, int index) {
                       return Card(
                         margin: const EdgeInsets.all(5),
+                        color: index % 2 == 0
+                          ? const Color.fromARGB(218, 241, 241, 241)
+                          : const Color.fromARGB(255, 187, 187, 187),
+                          shape: RoundedRectangleBorder(
+                            side: const BorderSide(
+                              color: Color.fromARGB(255, 31, 41, 55),
+                              width: 1),
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         child: Container(
                           height: 80,
                           alignment: Alignment.center,
@@ -77,7 +86,10 @@ class _TeamsState extends State<Teams> {
                               Expanded(
                                 child: Text(checkNames(index),
                                     textAlign: TextAlign.center,
-                                    style: const TextStyle(fontSize: 20)),
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      ),
+                                  ),
                               ),
                             ],
                           ),
