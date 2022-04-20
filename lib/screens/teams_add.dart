@@ -45,8 +45,8 @@ class _TeamsAddState extends State<TeamsAdd> {
                   ),
                 ),
                 onPressed: () {
-                  getTeams();
-                  //search("tye");
+                  //getTeams();
+                  search("t");
                 },
                 child: const Text("test button"),
               ),
@@ -58,7 +58,8 @@ class _TeamsAddState extends State<TeamsAdd> {
 
 class CustomSearchDelegate extends SearchDelegate
 {
-  List searchTerms = [];
+  //late List<User> list;
+  late List<User> searchTerms = [];
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -84,12 +85,15 @@ class CustomSearchDelegate extends SearchDelegate
 
   @override
   Widget buildResults(BuildContext context) {
-    //<List> users = search(query);
     List matchQuery = [];
+    getList(query);
 
     for (var user in searchTerms) {
-      if (user.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(user);
+      // if (user.toLowerCase().contains(query.toLowerCase())) {
+      //   matchQuery.add(user.getUser());
+      // }
+      if (user.getUser().toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(user.getUser());
       }
     }
     return ListView.builder(
@@ -110,9 +114,13 @@ class CustomSearchDelegate extends SearchDelegate
   @override
   Widget buildSuggestions(BuildContext context) {
     List<String> matchQuery = [];
+    getList(query);
     for (var user in searchTerms) {
-      if (user.toLowerCase().contains(query.toLowerCase())) {
-        matchQuery.add(user);
+      // if (user.toLowerCase().contains(query.toLowerCase())) {
+      //   matchQuery.add(user.getUser());
+      // }
+      if (user.getUser().toLowerCase().contains(query.toLowerCase())) {
+        matchQuery.add(user.getUser());
       }
     }
     return ListView.builder(
@@ -127,6 +135,16 @@ class CustomSearchDelegate extends SearchDelegate
         );
       }
     );
+  }
+
+  getList(String query) async
+  {
+    Future<List<User>> users = search(query);
+    searchTerms = await users;
+    // for (int i = 0; i < list.length; i++)
+    // {
+    //   print(list[i].getUser());
+    // }
   }
 
   createDialog(context, var result)

@@ -6,10 +6,38 @@ import 'dart:io';
 const url = "https://hbchess.app/api/users/search";
 //const url = "http://10.0.2.2:8080/api/users/search";
 
-Future<List> search(String query) async
+class User
+{
+  final String id;
+  final String username;
+
+  const User({
+    required this.id,
+    required this.username,
+  });
+
+  String getUser()
+  {
+    return username;
+  }
+
+  String getID()
+  {
+    return id;
+  }
+
+  factory User.fromJson(Map<User, dynamic> json) {
+    return User(
+      id: json['_id'],
+      username: json['username'],
+    );
+  }
+}
+
+Future<List<User>> search(String query) async
 {
   var token = await storage.read(key: "token");
-  List users = [];
+  List<User> users = [];
 
   try
   {
@@ -26,7 +54,14 @@ Future<List> search(String query) async
     if (response.statusCode == 200)
     {
       var responseData = json.decode(response.body);
-      users = responseData["results"];
+      List res = responseData['results'];
+      //var test = res[0];
+      //print(res[0]['username']);
+      //print(test['_id']);
+      for (int i = 0; i < res.length; i++)
+      {
+        users.add(User(id: res[i]['_id'], username: res[i]['username']));
+      }
     }
 
   }
@@ -34,6 +69,6 @@ Future<List> search(String query) async
   {
     print(e.toString());
   }
-
+  //print(users[1].getUser());
   return users;
 }
