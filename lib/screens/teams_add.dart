@@ -2,8 +2,10 @@ import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 import 'package:hb_chess/utils/getTeamsAPI.dart';
+import 'package:hb_chess/utils/getTeamsInviteAPI.dart';
 import 'package:hb_chess/utils/Search.dart';
 import 'dart:async';
+import 'package:hb_chess/main.dart';
 
 class TeamsAdd extends StatefulWidget {
   const TeamsAdd({Key? key}) : super(key: key);
@@ -13,6 +15,7 @@ class TeamsAdd extends StatefulWidget {
 }
 
 class _TeamsAddState extends State<TeamsAdd> {
+  late List<PendingTeam> teamNot = [];
 
   Icon customIcon = const Icon(Icons.search);
   Widget customSearchBar = const Text('Add Teams');
@@ -20,45 +23,80 @@ class _TeamsAddState extends State<TeamsAdd> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-      appBar: AppBar(
-        title: customSearchBar,
-        actions: [
-          IconButton(
-          onPressed: () {
-            showSearch(
-              context: context,
-              delegate: CustomSearchDelegate(),
-            );
-          },
-          icon: customIcon,
-          )
-        ],
-      ),
-      body: Center(
-        child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: const Color.fromARGB(141, 41, 55, 100),
-                  textStyle: const TextStyle(fontSize: 20),
-                  minimumSize: const Size.fromHeight(50),
-                  side: const BorderSide(
-                    width: 1,
-                    color: Color.fromARGB(31, 16, 23, 94),
-                    style: BorderStyle.solid,
-                  ),
+    getRequests();
+      return Scaffold(
+        appBar: AppBar(
+          title: customSearchBar,
+          actions: [
+            IconButton(
+            onPressed: () {
+              showSearch(
+                context: context,
+                delegate: CustomSearchDelegate(),
+              );
+            },
+            icon: customIcon,
+            )
+          ],
+        ),
+        body:
+          Column(
+            children: [
+              Expanded(
+                child: CustomScrollView(
+                  slivers: <Widget>[
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                        (BuildContext context, int index) {
+                          return Card(
+                          margin: const EdgeInsets.all(5),
+                          child: Container(
+                            height: 80,
+                            alignment: Alignment.center,
+                            child: Row(
+                              children: <Widget>[
+                                Expanded(
+                                  child: Text(teamNot[index].getSenderUser(),
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(fontSize: 20)),
+                                ),
+                                Container(
+                                  margin: const EdgeInsets.only(right: 30),
+                                  child: TextButton(
+                                    onPressed: ()
+                                    {
+                                      //getPendingTeams();a
+                                      acceptInvite(teamNot[index].getSenderUser());
+                                    },
+                                    child: const Text("Accept"),
+                                    style: TextButton.styleFrom(
+                                    backgroundColor: Color.fromARGB(255, 43, 128, 76),
+                                    primary: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                        },
+                        childCount: teamNot.length,
+                      ),
+                    ),
+                  ],
                 ),
-                onPressed: () {
-                  //getTeams();
-                },
-                child: const Text("test button"),
               ),
-            ),
-      ),
-    );
+            ],
+          ),
+        );
+
   }
 
+  getRequests() async {
+    Future<List<PendingTeam>> resInvites = getPendingTeams();
+    teamNot = await resInvites;
+    if (mounted) setState((){});
+  }
 
 }
 
