@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:hb_chess/main.dart';
 import 'package:hb_chess/utils/getTeamsAPI.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:hb_chess/utils/Search.dart';
 import 'package:http/http.dart';
 
-//late List<Team> teams = [];
 
 // need to add lazy loading for Teams entries
 class Teams extends StatefulWidget {
@@ -16,11 +16,14 @@ class Teams extends StatefulWidget {
 
 class _TeamsState extends State<Teams> {
   late List<Team> teams = [];
+  String name = '';
+  String teammate = '';
 
   @override
   Widget build(BuildContext context) {
 
-      getAcceptedTeams();
+    getAcceptedTeams();
+    getUserName();
 
     return Scaffold(
       appBar: AppBar(
@@ -72,7 +75,7 @@ class _TeamsState extends State<Teams> {
                             children: <Widget>[
                               // Name
                               Expanded(
-                                child: Text(teams[index].getRecipientUser(),
+                                child: Text(checkNames(index),
                                     textAlign: TextAlign.center,
                                     style: const TextStyle(fontSize: 20)),
                               ),
@@ -97,6 +100,23 @@ class _TeamsState extends State<Teams> {
     Future<List<Team>> res = getTeams();
     teams = await res;
     if (mounted) setState((){});
+  }
+
+  getUserName() async {
+    var token = await storage.read(key: "token");
+    Map<String, dynamic> decodedToken = JwtDecoder.decode(token!);
+    name = decodedToken['username'];
+  }
+
+  String checkNames(int index) {
+    if (teams[index].getRecipientUser().toLowerCase() == name.toLowerCase())
+    {
+      return teams[index].getSenderUser();
+    }
+    else
+    {
+      return teams[index].getRecipientUser();
+    }
   }
 }
 
