@@ -136,8 +136,6 @@ class _LeaderboardState extends State<Leaderboard> {
                                 child: Text('${teams[index][1]}',
                                     textAlign: TextAlign.center),
                               ),
-                              /*
-                        */
                             ],
                           ),
                         ),

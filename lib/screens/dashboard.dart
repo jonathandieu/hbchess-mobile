@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:hb_chess/main.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:hb_chess/utils/getStats.dart';
 
 List stats = [0, 0, 0];
+List<List> games = [
+  ['Red', 'Loss'],
+  ['Blue', 'Tie'],
+  ['Green', 'Loss'],
+  ['Yellow', 'Win'],
+  ['Pink', 'Win'],
+  ['Orange', 'Loss'],
+  ['Purple', 'Win'],
+  ['Gray', 'Win'],
+  ['Black', 'Win'],
+  ['White', 'WIn']
+];
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -12,6 +25,7 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+  //final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -51,7 +65,7 @@ class _DashboardState extends State<Dashboard> {
           body: Center(
             // Center is a layout widget. It takes a single child and positions it
             // in the middle of the parent.
-            child: Column(children: <Widget>[
+            child: Column(children: [
               const SizedBox(height: 25),
               Text(
                 'My Stats',
@@ -114,35 +128,73 @@ class _DashboardState extends State<Dashboard> {
                   ]),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 30),
               Text(
                 'Previous Games',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black, fontSize: 25),
               ),
               const SizedBox(height: 20),
-
-              /*
-              ConstrainedBox(
-                constraints: const BoxConstraints(
-                  minHeight: 100,
-                  maxWidth: 500,
-                ),
-                child: Container(
-                  color: const Color.fromARGB(255, 211, 211, 211),
-                  child: Row(
-                    children: const <Widget>[
-                      Expanded(
-                        child: Text('Team', textAlign: TextAlign.center),
-                      ),
-                      Expanded(
-                        child: Text('Result', textAlign: TextAlign.center),
+              Row(
+                children: const <Widget>[
+                  Expanded(
+                    child: Text('Team',
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                        textAlign: TextAlign.center),
+                  ),
+                  Expanded(
+                    child: Text('Result',
+                        style: TextStyle(color: Colors.black, fontSize: 20),
+                        textAlign: TextAlign.center),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 25),
+              Expanded(
+                child: Card(
+                  child: CustomScrollView(
+                    slivers: <Widget>[
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (BuildContext context, int index) {
+                            return Card(
+                              margin: const EdgeInsets.all(5),
+                              color: index % 2 == 0
+                                  ? Color.fromARGB(255, 173, 218, 175)
+                                  : Color.fromARGB(255, 214, 224, 215),
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                    color: Color.fromARGB(255, 31, 41, 55),
+                                    width: 1),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Container(
+                                height: 80,
+                                alignment: Alignment.center,
+                                child: Row(
+                                  children: <Widget>[
+                                    // Team
+                                    Expanded(
+                                      child: Text('${games[index][0]}',
+                                          textAlign: TextAlign.center),
+                                    ),
+                                    // Result
+                                    Expanded(
+                                      child: Text('${games[index][1]}',
+                                          textAlign: TextAlign.center),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                          childCount: games.length,
+                        ),
                       ),
                     ],
                   ),
                 ),
               ),
-              */
             ]),
           ),
         ),
@@ -150,9 +202,8 @@ class _DashboardState extends State<Dashboard> {
     );
   }
 
-  //FIXME: Update once stats are available
-  List getStats() {
-    return stats;
+  Future<String> getStats() async {
+    return await getStats();
   }
 
   ListTile createDrawerTile(IconData icon, String title, String route) {
