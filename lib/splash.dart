@@ -70,8 +70,8 @@ class _SplashState extends State<Splash> {
             child: FittedBox(
               child: Image.asset(
                 "assets/images/hblogo.png",
-                //width: 500,
-                //height: 500,
+                width: 500,
+                height: 500,
               ),
               fit: BoxFit.fitHeight,
             ),
