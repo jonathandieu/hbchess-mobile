@@ -1,17 +1,11 @@
+
 import 'package:flutter/material.dart';
 
 // Dummy data to test Teams page
-List<List> teams = [
+List<List> partners = [
   ['Red'],
-  ['Blue'],
-  ['Green'],
-  ['Yellow'],
-  ['Pink'],
-  ['Orange'],
-  ['Purple'],
-  ['Gray'],
-  ['Black'],
-  ['White']
+  ['sfgd'],
+  ['dfgdfgn'],
 ];
 
 // need to add lazy loading for Teams entries
@@ -23,7 +17,7 @@ class Teams extends StatefulWidget {
 }
 
 class _TeamsState extends State<Teams> {
-  List<List> players = getPlayers();
+  List<List> players = getPartners();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +50,7 @@ class _TeamsState extends State<Teams> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/addTeams');
                 },
-                child: const Text("Pending Invites"),
+                child: const Text("Add and Accept Invites"),
               ),
             ),
           ),
@@ -77,7 +71,7 @@ class _TeamsState extends State<Teams> {
                             children: <Widget>[
                               // Name
                               Expanded(
-                                child: Text('${teams[index][0]}',
+                                child: Text('${partners[index][0]}',
                                     textAlign: TextAlign.center),
                               ),
                             ],
@@ -85,7 +79,7 @@ class _TeamsState extends State<Teams> {
                         ),
                       );
                     },
-                    childCount: teams.length,
+                    childCount: partners.length,
                   ),
                 ),
               ],
@@ -97,9 +91,10 @@ class _TeamsState extends State<Teams> {
   }
 }
 
-// FIXME: Update once rankings are available
-List<List> getPlayers() {
-  return teams;
+// Grab your teammates
+List<List> getPartners() {
+  
+  return partners;
 }
 
 createPlayerCard(String team, String rank) {
