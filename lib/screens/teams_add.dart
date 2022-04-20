@@ -60,6 +60,7 @@ class CustomSearchDelegate extends SearchDelegate
 {
   //late List<User> list;
   late List<User> searchTerms = [];
+  late String res = '';
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -137,6 +138,12 @@ class CustomSearchDelegate extends SearchDelegate
     );
   }
 
+  inviteResult(String query) async
+  {
+    Future<String> message = createTeam(query);
+    res = await message;
+  }
+
   getList(String query) async
   {
     Future<List<User>> users = search(query);
@@ -163,9 +170,10 @@ class CustomSearchDelegate extends SearchDelegate
               onPressed: () {
                 // Navigator.of(context).pop(), child: const Text('Yes')
                 //FIXME: send request api
+                inviteResult(result);
                 Navigator.of(context).pop();
                 ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Sent a friend request to " + result)),
+                      SnackBar(content: Text(res)),
                 );
               },
               child: const Text('Yes'),

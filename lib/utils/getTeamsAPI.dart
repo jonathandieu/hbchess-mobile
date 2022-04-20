@@ -6,20 +6,6 @@ import 'dart:io';
 const url = 'https://hbchess.app/api/teams';
 //const url = 'http://10.0.2.2:8080/api/teams';
 
-class Partner {
-  String id;
-  String username;
-
-  Partner(this.id, this.username);
-
-  //   factory Partner.fromJson(Map<String, dynamic> json) {
-  //   return Partner(
-  //     json['team']['_id'].toString(),
-  //     json['team']['recipientUsername'].toString()
-  //   );
-  // }
-}
-
 Future<List> getTeams() async
 {
   var token = await storage.read(key: "token");
@@ -62,4 +48,50 @@ Future<List> getTeams() async
   }
 
   return teams;
+}
+
+Future<String> createTeam(String user) async
+{
+  String ret = '';
+  var token = await storage.read(key: "token");
+
+  try
+  {
+    http.Response response = await http.post(Uri.parse(url + '/create'),
+        body: jsonEncode({
+          "username": user,
+        }),
+        headers:
+        {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+          "Authorization": "Bearer $token",
+        },
+        encoding: Encoding.getByName("utf-8")
+    );
+
+    if (response.statusCode == 201)
+    {
+      var responseData = json.decode(response.body);
+      ret = responseData['message'];
+    }
+    else if (response.statusCode == 400)
+    {
+      ret = "Invalid user data";
+    }
+    else if (response.statusCode == 404)
+    {
+      ret = "Username doesn't exist";
+    }
+    else if (response.statusCode == 409)
+    {
+      ret = "Team request still pending";
+    }
+  }
+  catch (e)
+  {
+    print(e.toString());
+  }
+
+  return ret;
 }
