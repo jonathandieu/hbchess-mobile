@@ -47,15 +47,10 @@ class _MyHomePageState extends State<MyHomePage> {
                 createDrawerTile(Icons.home, 'Home', '/home'),
                 createDrawerTile(
                     Icons.leaderboard, 'Leaderboard', '/leaderboard'),
-                //createDrawerTile(Icons.book, 'Rules', '/rules'),
+                createDrawerTile(Icons.book, 'Rules', '/rules'),
                 createDrawerTile(
                     Icons.person_add_alt_outlined, 'Sign Up', '/register'),
                 createDrawerTile(Icons.login, 'Login', '/login'),
-                //createDrawerTile(Icons.settings, 'Settings', '/settings'),
-                //Icons.home, 'Home', '/home'),
-                createDrawerTile(
-                    Icons.leaderboard, 'Leaderboard', '/leaderboard'),
-                createDrawerTile(Icons.book, 'Rules', '/rules'),
               ],
             ),
           ),

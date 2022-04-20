@@ -21,7 +21,7 @@ class _DashboardState extends State<Dashboard> {
           drawer: Drawer(
             child: ListView(
               padding: EdgeInsets.zero,
-              children: [
+              children: <Widget>[
                 const DrawerHeader(
                   decoration: BoxDecoration(
                     color: Color.fromARGB(255, 31, 41, 55),
@@ -40,7 +40,18 @@ class _DashboardState extends State<Dashboard> {
                     Icons.leaderboard, 'Leaderboard', '/leaderboard'),
                 createDrawerTile(Icons.book, 'Rules', '/rules'),
                 createDrawerTile(Icons.person, 'Teams', '/teams'),
-                createDrawerTile(Icons.settings, 'Settings', '/settings'),
+                //createDrawerTile(Icons.settings, 'Settings', '/settings'),
+                ListTile(
+                  leading: Icon(Icons.logout),
+                  title: Text("Log Out"),
+                  onTap: () async {
+                      await storage.deleteAll();
+                      Navigator.pushNamed(context, '/home');
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text("You have logged out")),
+                    );
+                  }
+                ),
               ],
             ),
           ),

@@ -17,7 +17,7 @@ class Routes {
   static const String dashboard = '/dashboard';
   static const String rules = '/rules';
   static const String teams = '/teams';
-  static const String settings = '/settings';
+  //static const String settings = '/settings';
   static const String teamsAdd = '/addTeams';
 
   static Map<String, Widget Function(BuildContext)> get getRoutes => {
@@ -28,7 +28,7 @@ class Routes {
     dashboard: (context) => const Dashboard(),
     rules: (context) => const Rules(),
     teams: (context) => const Teams(),
-    settings: (context) => const Settings(),
+    //settings: (context) => const Settings(),
     teamsAdd: (context) => const TeamsAdd(),
   };
 }
