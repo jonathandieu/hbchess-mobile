@@ -1,3 +1,5 @@
+import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
 import 'package:hb_chess/utils/getTeamsAPI.dart';
 import 'package:hb_chess/utils/Search.dart';
@@ -11,10 +13,13 @@ class TeamsAdd extends StatefulWidget {
 }
 
 class _TeamsAddState extends State<TeamsAdd> {
+
   Icon customIcon = const Icon(Icons.search);
   Widget customSearchBar = const Text('Add Teams');
+
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: customSearchBar,
@@ -46,7 +51,6 @@ class _TeamsAddState extends State<TeamsAdd> {
                 ),
                 onPressed: () {
                   //getTeams();
-                  search("t");
                 },
                 child: const Text("test button"),
               ),
@@ -54,6 +58,8 @@ class _TeamsAddState extends State<TeamsAdd> {
       ),
     );
   }
+
+
 }
 
 class CustomSearchDelegate extends SearchDelegate

@@ -1,18 +1,48 @@
 import 'package:hb_chess/main.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:io';
+import 'package:hb_chess/utils/Search.dart';
 
 const url = 'https://hbchess.app/api/teams';
 //const url = 'http://10.0.2.2:8080/api/teams';
 
-Future<List> getTeams() async
+class Team
+{
+  final String id;
+  final User sender;
+  final User recipient;
+
+  const Team({
+    required this.id,
+    required this.sender,
+    required this.recipient
+  });
+
+  String getSenderUser()
+  {
+    return sender.getUser();
+  }
+
+  String getRecipientUser()
+  {
+    return recipient.getUser();
+  }
+
+  factory Team.fromJson(Map<Team, dynamic> json) {
+    return Team(
+      id: json['_id'],
+      sender: User(id: json['sender']['_id'], username: json['sender']['username']),
+      recipient: User(id: json['recipient']['_id'], username: json['recipient']['username']),
+    );
+  }
+
+}
+
+Future<List<Team>> getTeams() async
 {
   var token = await storage.read(key: "token");
 
-  print("reached function");
-  //List<Partner> partners = []; 
-  List teams = [];
+  List<Team> teams = [];
 
   try
   {
@@ -25,20 +55,21 @@ Future<List> getTeams() async
         },
 
     );
-    print("made request");
-    print(response.statusCode);
 
     var responseData = json.decode(response.body);
 
-    if (response.statusCode == 400)
-    {
-      print("no email token");
-    }
-    else if (response.statusCode == 200)
+  if (response.statusCode == 200)
     {
       //List test = [1,2];
       //print(test);
-      print(responseData['team']);
+      List res = responseData['team'];
+      for (int i = 0; i < res.length; i++)
+      {
+        teams.add(Team(id: res[i]['_id'],
+        sender: User(id: res[i]['sender']['_id'], username: res[i]['sender']['username']),
+        recipient: User(id: res[i]['recipient']['_id'], username: res[i]['recipient']['username']))
+        );
+      }
     }
 
   }
@@ -46,7 +77,7 @@ Future<List> getTeams() async
   {
     print(e.toString());
   }
-
+  //print(teams[0].getRecipientUser());
   return teams;
 }
 

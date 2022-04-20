@@ -1,26 +1,27 @@
 
 import 'package:flutter/material.dart';
+import 'package:hb_chess/main.dart';
+import 'package:hb_chess/utils/getTeamsAPI.dart';
+import 'package:hb_chess/utils/Search.dart';
+import 'package:http/http.dart';
 
-// Dummy data to test Teams page
-List<List> partners = [
-  ['Red'],
-  ['sfgd'],
-  ['dfgdfgn'],
-];
+//late List<Team> teams = [];
 
 // need to add lazy loading for Teams entries
 class Teams extends StatefulWidget {
   const Teams({Key? key}) : super(key: key);
-
   @override
   State<Teams> createState() => _TeamsState();
 }
 
 class _TeamsState extends State<Teams> {
-  List<List> players = getPartners();
+  late List<Team> teams = [];
 
   @override
   Widget build(BuildContext context) {
+
+      getAcceptedTeams();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -71,15 +72,16 @@ class _TeamsState extends State<Teams> {
                             children: <Widget>[
                               // Name
                               Expanded(
-                                child: Text('${partners[index][0]}',
-                                    textAlign: TextAlign.center),
+                                child: Text(teams[index].getRecipientUser(),
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(fontSize: 20)),
                               ),
                             ],
                           ),
                         ),
                       );
                     },
-                    childCount: partners.length,
+                    childCount: teams.length,
                   ),
                 ),
               ],
@@ -89,12 +91,13 @@ class _TeamsState extends State<Teams> {
       ),
     );
   }
-}
 
-// Grab your teammates
-List<List> getPartners() {
-  
-  return partners;
+  // Grab your teammates
+  getAcceptedTeams() async {
+    Future<List<Team>> res = getTeams();
+    teams = await res;
+    if (mounted) setState((){});
+  }
 }
 
 createPlayerCard(String team, String rank) {
