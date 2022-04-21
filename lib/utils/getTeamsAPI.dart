@@ -11,11 +11,17 @@ class Team
   final String id;
   final User sender;
   final User recipient;
+  final List wins;
+  final List draws;
+  final List loss;
 
   const Team({
     required this.id,
     required this.sender,
-    required this.recipient
+    required this.recipient,
+    required this.wins,
+    required this.draws,
+    required this.loss,
   });
 
   String getSenderUser()
@@ -33,6 +39,9 @@ class Team
       id: json['_id'],
       sender: User(id: json['sender']['_id'], username: json['sender']['username']),
       recipient: User(id: json['recipient']['_id'], username: json['recipient']['username']),
+      wins: json['wins'],
+      draws: json['ties'],
+      loss: json['losses'],
     );
   }
 
@@ -67,7 +76,12 @@ Future<List<Team>> getTeams() async
       {
         teams.add(Team(id: res[i]['_id'],
         sender: User(id: res[i]['sender']['_id'], username: res[i]['sender']['username']),
-        recipient: User(id: res[i]['recipient']['_id'], username: res[i]['recipient']['username']))
+        recipient: User(id: res[i]['recipient']['_id'], username: res[i]['recipient']['username']),
+        wins: res[i]['wins'],
+        draws: res[i]['ties'],
+        loss: res[i]['losses']
+        
+        )
         );
       }
     }

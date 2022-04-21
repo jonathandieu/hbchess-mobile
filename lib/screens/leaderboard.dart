@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hb_chess/main.dart';
 
 // Dummy data to test leaderboard page
 List<List> teams = [
@@ -82,7 +83,7 @@ class _LeaderboardState extends State<Leaderboard> {
                     child: Text('Team', textAlign: TextAlign.center),
                   ),
                   Expanded(
-                    child: Text('Rank', textAlign: TextAlign.center),
+                    child: Text('Score', textAlign: TextAlign.center),
                   ),
                 ],
               ),
@@ -124,24 +125,30 @@ class _LeaderboardState extends State<Leaderboard> {
                               // #
                               Expanded(
                                 child: Text('${index + 1}',
-                                    textAlign: TextAlign.center),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 15),
+                                    ),
                               ),
                               // Team
                               Expanded(
-                                child: Text('${teams[index][0]}',
-                                    textAlign: TextAlign.center),
+                                child: Text(ranks[index].getSenderUser() + ' - ' + ranks[index].getRecipientUser(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 15),
+                                    ),
                               ),
                               // Rank
                               Expanded(
-                                child: Text('${teams[index][1]}',
-                                    textAlign: TextAlign.center),
+                                child: Text('${ranks[index].wins.length} - ${ranks[index].draws.length} - ${ranks[index].loss.length}',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 15),
+                                    ),
                               ),
                             ],
                           ),
                         ),
                       );
                     },
-                    childCount: teams.length,
+                    childCount: ranks.length,
                   ),
                 ),
               ],
