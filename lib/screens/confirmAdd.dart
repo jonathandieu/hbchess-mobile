@@ -54,9 +54,6 @@ class _AddState extends State<Add>
                           {
                             inviteResult(widget.query);
                             Navigator.of(context).pop();
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(res)),
-                            );
                           },
                           child: const Text("Send Request"),
                           style: TextButton.styleFrom(
