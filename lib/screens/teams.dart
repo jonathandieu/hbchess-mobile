@@ -6,7 +6,7 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:hb_chess/utils/Search.dart';
 import 'package:http/http.dart';
 
-
+late List<Team> teams = [];
 // need to add lazy loading for Teams entries
 class Teams extends StatefulWidget {
   const Teams({Key? key}) : super(key: key);
@@ -15,7 +15,6 @@ class Teams extends StatefulWidget {
 }
 
 class _TeamsState extends State<Teams> {
-  late List<Team> teams = [];
   String name = '';
   String teammate = '';
 
