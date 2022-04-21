@@ -15,6 +15,7 @@ class _RulesState extends State<Rules> {
       appBar: AppBar(
         title: const Text("Rules"),
       ),
+      /*
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -40,6 +41,7 @@ class _RulesState extends State<Rules> {
           ],
         ),
       ),
+      */
       backgroundColor: Colors.white,
       body: Center(
         child: ListView(
