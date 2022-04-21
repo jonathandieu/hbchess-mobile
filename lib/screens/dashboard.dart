@@ -15,7 +15,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     _getPreviousGames();
-    getAcceptedTeams();
+    //getAcceptedTeams();
 
     return Stack(
       children: [
@@ -92,6 +92,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ],
               ),
+              //
               Expanded(
                 child: Card(
                   child: CustomScrollView(
@@ -171,7 +172,7 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
               const SizedBox(height: 10),
-
+              //
               // Scrollable list of prev games
               Expanded(
                 child: Card(
@@ -239,14 +240,18 @@ class _DashboardState extends State<Dashboard> {
   }
 
   // Grab your teammates
+  /*
   getAcceptedTeams() async {
     Future<List<Team>> res = getTeams();
     teams = await res;
     //if (mounted) setState(() {});
-    setState(() {});
   }
+  */
 
   _getPreviousGames() async {
+    //if (mounted) setState(() {});
+    Future<List<Team>> res = getTeams();
+    teams = await res;
     Future<List<Result>> res2 = getPreviousGames();
     prevGames = await res2;
   }
