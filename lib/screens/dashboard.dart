@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hb_chess/main.dart';
+
 import 'package:hb_chess/utils/getPreviousGames.dart';
 
 List<Result> prevGames = [];
@@ -66,7 +67,6 @@ class _DashboardState extends State<Dashboard> {
             // Center is a layout widget. It takes a single child and positions it
             // in the middle of the parent.
             child: Column(children: [
-              // Wins/Draws/Losses
               const SizedBox(height: 20),
               const Text(
                 'Previous Games',
@@ -84,7 +84,6 @@ class _DashboardState extends State<Dashboard> {
                   Expanded(
                     child: Text('Opponent Team',
                         style: TextStyle(color: Colors.black, fontSize: 15),
-                        textAlign: TextAlign.center),
                   ),
                   Expanded(
                     child: Text('Result',
@@ -95,7 +94,6 @@ class _DashboardState extends State<Dashboard> {
               ),
               const SizedBox(height: 25),
 
-              //Text('${results.length}'),
               // Scrollable list of prev games
               Expanded(
                 child: Card(
@@ -127,7 +125,6 @@ class _DashboardState extends State<Dashboard> {
                                               ' - ' +
                                               prevGames[index]
                                                   .getBlackRecipientUser(),
-                                          textAlign: TextAlign.center),
                                     ),
                                     // Result
                                     Expanded(
@@ -147,6 +144,7 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             );
                           },
+
                           childCount: prevGames.length,
                         ),
                       ),
