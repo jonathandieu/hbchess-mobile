@@ -35,6 +35,7 @@ class _LeaderboardState extends State<Leaderboard> {
       ),
 
       // Shared Drawer Menu
+      /*
       drawer: Drawer(
         child: SizedBox(
           height: 2000,
@@ -64,6 +65,7 @@ class _LeaderboardState extends State<Leaderboard> {
           ),
         ),
       ),
+      */
       body: Column(
         children: [
           // Leaderboard header
@@ -124,24 +126,29 @@ class _LeaderboardState extends State<Leaderboard> {
                             children: <Widget>[
                               // #
                               Expanded(
-                                child: Text('${index + 1}',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 15),
-                                    ),
+                                child: Text(
+                                  '${index + 1}',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                               // Team
                               Expanded(
-                                child: Text(ranks[index].getSenderUser() + ' - ' + ranks[index].getRecipientUser(),
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 15),
-                                    ),
+                                child: Text(
+                                  ranks[index].getSenderUser() +
+                                      ' - ' +
+                                      ranks[index].getRecipientUser(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                               // Rank
                               Expanded(
-                                child: Text('${ranks[index].wins.length} - ${ranks[index].draws.length} - ${ranks[index].loss.length}',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(fontSize: 15),
-                                    ),
+                                child: Text(
+                                  '${ranks[index].wins.length} - ${ranks[index].draws.length} - ${ranks[index].loss.length}',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 15),
+                                ),
                               ),
                             ],
                           ),

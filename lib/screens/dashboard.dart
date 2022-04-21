@@ -14,7 +14,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-
   @override
   Widget build(BuildContext context) {
     _getPreviousGames();
@@ -80,23 +79,20 @@ class _DashboardState extends State<Dashboard> {
               Row(
                 children: const [
                   Expanded(
-                    child:
-                      Text(
-                        'Your Teams',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.black, fontSize: 15),
-                      ),
+                    child: Text(
+                      'Your Teams',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.black, fontSize: 15),
+                    ),
                   ),
                   Expanded(
-                    child:
-                      Text(
-                        'win-draw-loss',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.black, fontSize: 15),
-                      ),
+                    child: Text(
+                      'win-draw-loss',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.black, fontSize: 15),
+                    ),
                   ),
                 ],
-
               ),
               Expanded(
                 child: Card(
@@ -123,13 +119,17 @@ class _DashboardState extends State<Dashboard> {
                                   children: <Widget>[
                                     // Team
                                     Expanded(
-                                      child: Text(teams[index].getRecipientUser() + ' - ' + teams[index].getSenderUser(),
+                                      child: Text(
+                                          teams[index].getRecipientUser() +
+                                              ' - ' +
+                                              teams[index].getSenderUser(),
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(fontSize: 15)),
                                     ),
                                     // Result
                                     Expanded(
-                                      child: Text('${teams[index].wins.length} - ${teams[index].draws.length} - ${teams[index].loss.length}',
+                                      child: Text(
+                                          '${teams[index].wins.length} - ${teams[index].draws.length} - ${teams[index].loss.length}',
                                           textAlign: TextAlign.center,
                                           style: const TextStyle(fontSize: 15)),
                                     ),
@@ -160,8 +160,10 @@ class _DashboardState extends State<Dashboard> {
                         textAlign: TextAlign.center),
                   ),
                   Expanded(
-                    child: Text('White Team',
-                        style: TextStyle(color: Colors.black, fontSize: 15),
+                    child: Text(
+                      'White Team',
+                      style: TextStyle(color: Colors.black, fontSize: 15),
+                    ),
                   ),
                   Expanded(
                     child: Text('Result',
@@ -199,15 +201,17 @@ class _DashboardState extends State<Dashboard> {
                                     // Team
                                     Expanded(
                                       child: Text(
-                                          prevGames[index].getBlackSenderUser() +
-                                              ' - ' +
-                                              prevGames[index]
-                                                  .getBlackRecipientUser(),
+                                        prevGames[index].getBlackSenderUser() +
+                                            ' - ' +
+                                            prevGames[index]
+                                                .getBlackRecipientUser(),
+                                      ),
                                     ),
                                     // Result
                                     Expanded(
                                       child: Text(
-                                          prevGames[index].getWhiteSenderUser() +
+                                          prevGames[index]
+                                                  .getWhiteSenderUser() +
                                               ' - ' +
                                               prevGames[index]
                                                   .getWhiteRecipientUser(),
@@ -222,7 +226,6 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             );
                           },
-
                           childCount: prevGames.length,
                         ),
                       ),
@@ -241,14 +244,13 @@ class _DashboardState extends State<Dashboard> {
   getAcceptedTeams() async {
     Future<List<Team>> res = getTeams();
     teams = await res;
-    if (mounted) setState((){});
+    if (mounted) setState(() {});
   }
 
-_getPreviousGames() async {
-  Future<List<Result>> res2 = getPreviousGames();
-  prevGames = await res2;
-}
-
+  _getPreviousGames() async {
+    Future<List<Result>> res2 = getPreviousGames();
+    prevGames = await res2;
+  }
 
   ListTile createDrawerTile(IconData icon, String title, String route) {
     //BuildContext context
