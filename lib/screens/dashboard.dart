@@ -243,6 +243,7 @@ class _DashboardState extends State<Dashboard> {
     Future<List<Team>> res = getTeams();
     teams = await res;
     //if (mounted) setState(() {});
+    setState(() {});
   }
 
   _getPreviousGames() async {
