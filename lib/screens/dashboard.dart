@@ -5,8 +5,6 @@ import 'package:hb_chess/utils/getPreviousGames.dart';
 import 'package:hb_chess/screens/teams.dart';
 import 'package:hb_chess/utils/getTeamsAPI.dart';
 
-List<Result> prevGames = [];
-
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
   @override

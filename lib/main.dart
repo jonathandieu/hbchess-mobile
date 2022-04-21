@@ -8,6 +8,7 @@ import 'package:hb_chess/utils/getTeamsAPI.dart';
 
 final storage = FlutterSecureStorage();
 List<Team> ranks = [];
+List<Result> prevGames = [];
 
 Map<int, Color> color = {
   50: const Color.fromARGB(31, 41, 55, 100),
