@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hb_chess/main.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:hb_chess/utils/getStats.dart';
+import 'dart:developer';
 
 List stats = [0, 0, 0];
+var allstats = '';
 List<List> games = [
   ['Red', 'Loss'],
   ['Blue', 'Tie'],
@@ -19,13 +21,22 @@ List<List> games = [
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
-
   @override
   State<Dashboard> createState() => _DashboardState();
 }
 
 class _DashboardState extends State<Dashboard> {
   //final _formKey = GlobalKey<FormState>();
+  @override
+  void initState() {
+    super.initState();
+    asyncString();
+  }
+
+  void asyncString() async {
+    allstats = await getStats();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -34,6 +45,8 @@ class _DashboardState extends State<Dashboard> {
           appBar: AppBar(
             title: const Text('Dashboard'),
           ),
+
+          // Menu
           drawer: Drawer(
             child: ListView(
               padding: EdgeInsets.zero,
@@ -61,18 +74,22 @@ class _DashboardState extends State<Dashboard> {
             ),
           ),
 
-          // This is the main item to edit for dashboard
+          // Dashboard
           body: Center(
             // Center is a layout widget. It takes a single child and positions it
             // in the middle of the parent.
             child: Column(children: [
               const SizedBox(height: 25),
-              Text(
+              //Text(getStats()),
+              //Text('${allstats.length}'),
+              const Text(
                 'My Stats',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black, fontSize: 25),
               ),
               const SizedBox(height: 20),
+
+              // Wins/Draws/Losses
               Container(
                 height: 85,
                 child: Card(
@@ -106,21 +123,22 @@ class _DashboardState extends State<Dashboard> {
                         Expanded(
                           // wins
                           child: Text('${stats[0]}',
-                              style:
-                                  TextStyle(color: Colors.green, fontSize: 20),
+                              style: const TextStyle(
+                                  color: Colors.green, fontSize: 20),
                               textAlign: TextAlign.center),
                         ),
                         Expanded(
                           // draws
                           child: Text('${stats[1]}',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 20),
+                              style: const TextStyle(
+                                  color: Colors.black, fontSize: 20),
                               textAlign: TextAlign.center),
                         ),
                         Expanded(
                           // losses
                           child: Text('${stats[2]}',
-                              style: TextStyle(color: Colors.red, fontSize: 20),
+                              style: const TextStyle(
+                                  color: Colors.red, fontSize: 20),
                               textAlign: TextAlign.center),
                         ),
                       ],
@@ -129,7 +147,7 @@ class _DashboardState extends State<Dashboard> {
                 ),
               ),
               const SizedBox(height: 30),
-              Text(
+              const Text(
                 'Previous Games',
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black, fontSize: 25),
@@ -150,6 +168,8 @@ class _DashboardState extends State<Dashboard> {
                 ],
               ),
               const SizedBox(height: 25),
+
+              // Scrollable list of prev games
               Expanded(
                 child: Card(
                   child: CustomScrollView(
@@ -160,10 +180,10 @@ class _DashboardState extends State<Dashboard> {
                             return Card(
                               margin: const EdgeInsets.all(5),
                               color: index % 2 == 0
-                                  ? Color.fromARGB(255, 173, 218, 175)
-                                  : Color.fromARGB(255, 214, 224, 215),
+                                  ? const Color.fromARGB(255, 173, 218, 175)
+                                  : const Color.fromARGB(255, 214, 224, 215),
                               shape: RoundedRectangleBorder(
-                                side: BorderSide(
+                                side: const BorderSide(
                                     color: Color.fromARGB(255, 31, 41, 55),
                                     width: 1),
                                 borderRadius: BorderRadius.circular(10),
@@ -200,10 +220,6 @@ class _DashboardState extends State<Dashboard> {
         ),
       ],
     );
-  }
-
-  Future<String> getStats() async {
-    return await getStats();
   }
 
   ListTile createDrawerTile(IconData icon, String title, String route) {
