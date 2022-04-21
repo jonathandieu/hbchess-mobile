@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hb_chess/main.dart';
 import 'package:hb_chess/utils/getPreviousGames.dart';
 import 'package:hb_chess/screens/teams.dart';
+import 'package:hb_chess/utils/getTeamsAPI.dart';
 
 List<Result> prevGames = [];
 
@@ -16,6 +17,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     _getPreviousGames();
+    getAcceptedTeams();
 
     return Stack(
       children: [
@@ -235,6 +237,13 @@ class _DashboardState extends State<Dashboard> {
         ),
       ],
     );
+  }
+
+  // Grab your teammates
+  getAcceptedTeams() async {
+    Future<List<Team>> res = getTeams();
+    teams = await res;
+    if (mounted) setState((){});
   }
 
 _getPreviousGames() async {
