@@ -1,22 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hb_chess/main.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
-import 'dart:developer';
+import 'package:hb_chess/utils/getPreviousGames.dart';
 
-List stats = [0, 0, 0];
-var allstats = '';
-List<List> games = [
-  ['Red', 'Loss'],
-  ['Blue', 'Tie'],
-  ['Green', 'Loss'],
-  ['Yellow', 'Win'],
-  ['Pink', 'Win'],
-  ['Orange', 'Loss'],
-  ['Purple', 'Win'],
-  ['Gray', 'Win'],
-  ['Black', 'Win'],
-  ['White', 'WIn']
-];
+List<Result> prevGames = [];
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -25,8 +11,11 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
+
   @override
   Widget build(BuildContext context) {
+    _getPreviousGames();
+
     return Stack(
       children: [
         Scaffold(
@@ -77,74 +66,8 @@ class _DashboardState extends State<Dashboard> {
             // Center is a layout widget. It takes a single child and positions it
             // in the middle of the parent.
             child: Column(children: [
-              const SizedBox(height: 25),
-              //Text(getStats()),
-              //Text('${allstats.length}'),
-              const Text(
-                'My Stats',
-                textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.black, fontSize: 25),
-              ),
-              const SizedBox(height: 20),
-
               // Wins/Draws/Losses
-              Container(
-                height: 85,
-                child: Card(
-                  color: const Color.fromARGB(255, 211, 211, 211),
-                  child: Column(children: [
-                    Row(
-                      children: const <Widget>[
-                        Expanded(
-                          child: Text('Wins',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 20),
-                              textAlign: TextAlign.center),
-                        ),
-                        Expanded(
-                          child: Text('Draws',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 20),
-                              textAlign: TextAlign.center),
-                        ),
-                        Expanded(
-                          child: Text('Losses',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 20),
-                              textAlign: TextAlign.center),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 15),
-                    Row(
-                      children: <Widget>[
-                        Expanded(
-                          // wins
-                          child: Text('${stats[0]}',
-                              style: const TextStyle(
-                                  color: Colors.green, fontSize: 20),
-                              textAlign: TextAlign.center),
-                        ),
-                        Expanded(
-                          // draws
-                          child: Text('${stats[1]}',
-                              style: const TextStyle(
-                                  color: Colors.black, fontSize: 20),
-                              textAlign: TextAlign.center),
-                        ),
-                        Expanded(
-                          // losses
-                          child: Text('${stats[2]}',
-                              style: const TextStyle(
-                                  color: Colors.red, fontSize: 20),
-                              textAlign: TextAlign.center),
-                        ),
-                      ],
-                    ),
-                  ]),
-                ),
-              ),
-              const SizedBox(height: 30),
+              const SizedBox(height: 20),
               const Text(
                 'Previous Games',
                 textAlign: TextAlign.center,
@@ -200,23 +123,23 @@ class _DashboardState extends State<Dashboard> {
                                     // Team
                                     Expanded(
                                       child: Text(
-                                          results[index].getBlackSenderUser() +
+                                          prevGames[index].getBlackSenderUser() +
                                               ' - ' +
-                                              results[index]
-                                                  .getBlackSenderUser(),
+                                              prevGames[index]
+                                                  .getBlackRecipientUser(),
                                           textAlign: TextAlign.center),
                                     ),
                                     // Result
                                     Expanded(
                                       child: Text(
-                                          results[index].getWhiteSenderUser() +
+                                          prevGames[index].getWhiteSenderUser() +
                                               ' - ' +
-                                              results[index]
-                                                  .getWhiteSenderUser(),
+                                              prevGames[index]
+                                                  .getWhiteRecipientUser(),
                                           textAlign: TextAlign.center),
                                     ),
                                     Expanded(
-                                      child: Text(results[index].winner,
+                                      child: Text(prevGames[index].winner,
                                           textAlign: TextAlign.center),
                                     ),
                                   ],
@@ -224,7 +147,7 @@ class _DashboardState extends State<Dashboard> {
                               ),
                             );
                           },
-                          childCount: results.length,
+                          childCount: prevGames.length,
                         ),
                       ),
                     ],
@@ -237,6 +160,12 @@ class _DashboardState extends State<Dashboard> {
       ],
     );
   }
+
+_getPreviousGames() async {
+  Future<List<Result>> res2 = getPreviousGames();
+  prevGames = await res2;
+}
+
 
   ListTile createDrawerTile(IconData icon, String title, String route) {
     //BuildContext context

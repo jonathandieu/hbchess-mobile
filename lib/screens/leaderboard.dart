@@ -33,37 +33,6 @@ class _LeaderboardState extends State<Leaderboard> {
         centerTitle: true,
         title: const Text("Leaderboard"),
       ),
-
-      // Shared Drawer Menu
-      drawer: Drawer(
-        child: SizedBox(
-          height: 2000,
-          child: ListView(
-            padding: EdgeInsets.zero,
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  color: Color.fromARGB(255, 31, 41, 55),
-                ),
-                child: Text(
-                  'HBChess',
-                  style: TextStyle(
-                    fontSize: 28,
-                    color: Colors.white,
-                    fontFamily: 'Poppins-Regular',
-                  ),
-                ),
-              ),
-              createDrawerTile(Icons.home, 'Dashboard', '/dashboard'),
-              createDrawerTile(
-                  Icons.leaderboard, 'Leaderboard', '/leaderboard'),
-              createDrawerTile(Icons.book, 'Rules', '/rules'),
-              createDrawerTile(Icons.person, 'Teams', '/teams'),
-              createDrawerTile(Icons.settings, 'Settings', '/settings'),
-            ],
-          ),
-        ),
-      ),
       body: Column(
         children: [
           // Leaderboard header

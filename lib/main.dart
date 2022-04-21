@@ -8,7 +8,6 @@ import 'package:hb_chess/utils/getTeamsAPI.dart';
 
 final storage = FlutterSecureStorage();
 List<Team> ranks = [];
-List<Result> results = [];
 
 Map<int, Color> color = {
   50: const Color.fromARGB(31, 41, 55, 100),
@@ -28,14 +27,15 @@ _getCurrentRanks() async {
   ranks = await res;
 }
 
-_getPreviousGames() async {
-  Future<List<Result>> res = getPreviousGames();
-  results = await res;
-}
+// _getPreviousGames() async {
+//   Future<List<Result>> res2 = getPreviousGames();
+//   prevGames = await res2;
+// }
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   _getCurrentRanks();
-  _getPreviousGames();
+  //_getPreviousGames();
   runApp(const MyApp());
 }
 
