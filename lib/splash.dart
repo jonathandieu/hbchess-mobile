@@ -28,6 +28,7 @@ class _SplashState extends State<Splash> {
       if (!hasExpired) {
         Navigator.pushNamed(context, '/dashboard');
       } else {
+        storage.deleteAll();
         Navigator.pushNamed(context, '/home');
       }
     } else {

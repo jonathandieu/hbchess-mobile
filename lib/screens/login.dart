@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:hb_chess/utils/getAPI.dart';
+import 'package:hb_chess/utils/getLoginAPI.dart';
 import 'package:hb_chess/main.dart';
 
 class Login extends StatefulWidget {
@@ -69,15 +71,15 @@ class _LoginState extends State<Login> {
 
                           var email = _email.text;
                           var password = _password.text;
-                          var token = await doLogin(email, password);
+                          var res = await doLogin(email, password);
 
-                          if (token == "Url Not Found" || token == "Invalid Credentials")
+                          if (res == "Url Not Found" || res == "Invalid Credentials")
                           {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(content: Text(token)),
+                              SnackBar(content: Text(res)),
                             );
                           }
-                          else if (token == "")
+                          else if (res == "")
                           {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text("There was an error logging in")),
@@ -85,6 +87,8 @@ class _LoginState extends State<Login> {
                           }
                           else
                           {
+                            var key = json.decode(res);
+                            var token = key['token'];
                             storage.write(key: "token", value: token);
                             Navigator.pushNamed(context, '/dashboard');
                           }
