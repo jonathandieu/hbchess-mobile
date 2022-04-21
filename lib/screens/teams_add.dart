@@ -1,11 +1,12 @@
 import 'package:http/http.dart' as http;
-
+import 'package:hb_chess/screens/confirmAdd.dart';
 import 'package:flutter/material.dart';
 import 'package:hb_chess/utils/getTeamsAPI.dart';
 import 'package:hb_chess/utils/getTeamsInviteAPI.dart';
 import 'package:hb_chess/utils/Search.dart';
 import 'dart:async';
 import 'package:hb_chess/main.dart';
+import 'package:hb_chess/screens/teams.dart';
 
 class TeamsAdd extends StatefulWidget {
   const TeamsAdd({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ class _TeamsAddState extends State<TeamsAdd> {
   Widget build(BuildContext context) {
 
     getRequests();
+    getUserName();
       return Scaffold(
         appBar: AppBar(
           title: customSearchBar,
@@ -48,46 +50,54 @@ class _TeamsAddState extends State<TeamsAdd> {
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
-                          return Card(
-                          margin: const EdgeInsets.all(5),
-                          color: index % 2 == 0
-                            ? Color.fromARGB(218, 241, 241, 241)
-                            : Color.fromARGB(255, 187, 187, 187),
-                          shape: RoundedRectangleBorder(
-                            side: const BorderSide(
-                              color: Color.fromARGB(255, 31, 41, 55),
-                              width: 1),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Container(
-                            height: 80,
-                            alignment: Alignment.center,
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                  child: Text(teamNot[index].getSenderUser(),
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(fontSize: 20)),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(right: 30),
-                                  child: TextButton(
-                                    onPressed: ()
-                                    {
-                                      //getPendingTeams();a
-                                      acceptInvite(teamNot[index].getSenderUser());
-                                    },
-                                    child: const Text("Accept"),
-                                    style: TextButton.styleFrom(
-                                    backgroundColor: Color.fromARGB(255, 43, 128, 76),
-                                    primary: Colors.white,
+                          if (name.toLowerCase() == teamNot[index].getSenderUser().toLowerCase())
+                          {
+                            return SizedBox.shrink();
+                          }
+                          else 
+                          {
+                            return Card(
+                            margin: const EdgeInsets.all(5),
+                            color: index % 2 == 0
+                              ? Color.fromARGB(218, 241, 241, 241)
+                              : Color.fromARGB(255, 187, 187, 187),
+                            shape: RoundedRectangleBorder(
+                              side: const BorderSide(
+                                color: Color.fromARGB(255, 31, 41, 55),
+                                width: 1),
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Container(
+                              height: 80,
+                              alignment: Alignment.center,
+                              child: Row(
+                                children: <Widget>[
+                                  Expanded(
+                                    child: Text(name.toLowerCase() == teamNot[index].getSenderUser().toLowerCase() ? '' : teamNot[index].getSenderUser(),
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(fontSize: 20)),
+                                  ),
+                                  Container(
+                                    margin: const EdgeInsets.only(right: 30),
+                                    child: TextButton(
+                                      onPressed: ()
+                                      {
+                                        //getPendingTeams();a
+                                        acceptInvite(teamNot[index].getSenderUser());
+                                      },
+                                      child: const Text("Accept"),
+                                      style: TextButton.styleFrom(
+                                      backgroundColor: Color.fromARGB(255, 43, 128, 76),
+                                      primary: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        );
+                          );
+
+                          }
                         },
                         childCount: teamNot.length,
                       ),
@@ -157,7 +167,8 @@ class CustomSearchDelegate extends SearchDelegate
         return ListTile(
           title: Text(result),
           onTap: () {
-            createDialog(context, result);
+            //createDialog(context, result);
+            goToUserPage(context, result);
           },
         );
       }
@@ -184,18 +195,19 @@ class CustomSearchDelegate extends SearchDelegate
         return ListTile(
           title: Text(result),
           onTap: () {
-            createDialog(context, result);
+            //createDialog(context, result);
+            goToUserPage(context, result);
           },
         );
       }
     );
   }
 
-  inviteResult(String query) async
-  {
-    Future<String> message = createTeam(query);
-    res = await message;
-  }
+  // inviteResult(String query) async
+  // {
+  //   Future<String> message = createTeam(query);
+  //   res = await message;
+  // }
 
   getList(String query) async
   {
@@ -207,38 +219,43 @@ class CustomSearchDelegate extends SearchDelegate
     // }
   }
 
-  createDialog(context, var result)
+  goToUserPage(context, String query)
   {
-    showDialog(context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text("Send Request?"),
-          content: Text('Send friend request to ' + result + '?'),
-          actions: <Widget>[
-            OutlinedButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('No')
-            ),
-            TextButton(
-              onPressed: () {
-                // Navigator.of(context).pop(), child: const Text('Yes')
-                //FIXME: send request api
-                inviteResult(result);
-                Navigator.of(context).pop();
-                ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text(res)),
-                );
-              },
-              child: const Text('Yes'),
-              style: TextButton.styleFrom(
-                backgroundColor: const Color.fromARGB(255, 128, 150, 182),
-                primary: Colors.white,
-              ),
-            ),
-          ],
-        );
-      }
-    );
+    Navigator.push(context, MaterialPageRoute(builder: (_) => Add(query: query)));
   }
+
+  // createDialog(context, var result)
+  // {
+  //   showDialog(context: context,
+  //     builder: (context) {
+  //       return AlertDialog(
+  //         title: const Text("Send Request?"),
+  //         content: Text('Send friend request to ' + result + '?'),
+  //         actions: <Widget>[
+  //           OutlinedButton(
+  //             onPressed: () => Navigator.of(context).pop(),
+  //             child: const Text('No')
+  //           ),
+  //           TextButton(
+  //             onPressed: () {
+  //               // Navigator.of(context).pop(), child: const Text('Yes')
+  //               //FIXME: send request api
+  //               inviteResult(result);
+  //               Navigator.of(context).pop();
+  //               ScaffoldMessenger.of(context).showSnackBar(
+  //                     SnackBar(content: Text(res)),
+  //               );
+  //             },
+  //             child: const Text('Yes'),
+  //             style: TextButton.styleFrom(
+  //               backgroundColor: const Color.fromARGB(255, 128, 150, 182),
+  //               primary: Colors.white,
+  //             ),
+  //           ),
+  //         ],
+  //       );
+  //     }
+  //   );
+  // }
   
 }

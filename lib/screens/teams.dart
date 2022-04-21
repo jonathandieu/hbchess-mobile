@@ -7,6 +7,13 @@ import 'package:hb_chess/utils/Search.dart';
 import 'package:http/http.dart';
 
 late List<Team> teams = [];
+String name = '';
+
+getUserName() async {
+  var token = await storage.read(key: "token");
+  Map<String, dynamic> decodedToken = JwtDecoder.decode(token!);
+  name = decodedToken['username'];
+}
 // need to add lazy loading for Teams entries
 class Teams extends StatefulWidget {
   const Teams({Key? key}) : super(key: key);
@@ -14,8 +21,8 @@ class Teams extends StatefulWidget {
   State<Teams> createState() => _TeamsState();
 }
 
+
 class _TeamsState extends State<Teams> {
-  String name = '';
   String teammate = '';
 
   @override
@@ -111,12 +118,6 @@ class _TeamsState extends State<Teams> {
     Future<List<Team>> res = getTeams();
     teams = await res;
     if (mounted) setState((){});
-  }
-
-  getUserName() async {
-    var token = await storage.read(key: "token");
-    Map<String, dynamic> decodedToken = JwtDecoder.decode(token!);
-    name = decodedToken['username'];
   }
 
   String checkNames(int index) {
