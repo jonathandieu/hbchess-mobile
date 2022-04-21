@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '/splash.dart';
 import '/routes.dart';
+import 'package:hb_chess/utils/getLeaderboard.dart';
+import 'package:hb_chess/utils/getTeamsAPI.dart';
 
 final storage = FlutterSecureStorage();
+List<Team> ranks = [];
 
 Map<int, Color> color = {
   50: const Color.fromARGB(31, 41, 55, 100),
@@ -18,7 +21,14 @@ Map<int, Color> color = {
   900: const Color.fromARGB(31, 41, 55, 100),
 };
 
+_getCurrentRanks() async
+{
+  Future<List<Team>> res = getLeaderboard();
+  ranks = await res;
+}
+
 void main() {
+  _getCurrentRanks();
   runApp(const MyApp());
 }
 
